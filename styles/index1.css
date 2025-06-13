@@ -1,0 +1,171 @@
+/* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+} */
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p {
+    font-size: 20px;
+}
+
+.recommend-section {
+    margin-top: 40px;
+    width: 1100px;
+    margin: auto;
+}
+
+.des {
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.product-card {
+    text-align: center;
+}
+
+.product-img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-name {
+    text-align: center;
+    white-space: nowrap;
+    /* 防止换行 */
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.product-name:hover {
+    color: brown;
+    cursor: pointer;
+}
+
+.product-price {
+    color: brown;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.footer {
+    width: 100%;
+    background-color: #e5e4e4a1;
+}
+
+.footer .container1 {
+    border-bottom: 1px solid #ccc;
+}
+
+.footer .content {
+    margin: auto;
+    width: 1105px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background-color: #ebebeb;
+
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* 调整图标和文本之间的间距 */
+}
+
+.icon {
+    width: 30px;
+    /* 根据实际需要调整大小 */
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    /* 图标背景颜色 */
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.item span:last-child {
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.footer .container {
+    width: 1060px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    margin: auto;
+}
+
+.section {
+    /* text-align: left; */
+    /* margin-left: 100px; */
+    width: 80px;
+    /* margin: auto; */
+}
+
+.section h3 {
+    /* margin: auto; */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.section ul li a {
+    color: #666;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.section ul li a:hover {
+    color: brown;
+}
+
+
+
+
+.warning-container {
+    text-align: center;
+    /* background-color:  #e5e4e4a1; */
+    /* padding: 20px; */
+    /* margin-bottom: 0px; */
+    border-radius: 5px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    margin: auto;
+    max-width: 960px;
+}
+
+.warning-text {
+    color: #666;
+    line-height: 2;
+    font-size: 16px;
+}

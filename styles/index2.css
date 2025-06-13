@@ -1,0 +1,303 @@
+.recommend-section {
+    margin-top: 40px;
+    width: 1100px;
+    margin: auto;
+}
+
+.des {
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.product-card {
+    text-align: center;
+}
+
+.product-img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-name {
+    text-align: center;
+    white-space: nowrap;
+    /* 防止换行 */
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.product-name:hover {
+    color: brown;
+    cursor: pointer;
+}
+
+.product-price {
+    color: brown;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.footer {
+    width: 100%;
+    background-color: #e5e4e4a1;
+}
+
+.footer .container1 {
+    border-bottom: 1px solid #ccc;
+}
+
+.footer .content {
+    margin: auto;
+    width: 1105px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background-color: #ebebeb;
+
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* 调整图标和文本之间的间距 */
+}
+
+.icon {
+    width: 30px;
+    /* 根据实际需要调整大小 */
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    /* 图标背景颜色 */
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.item span:last-child {
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.footer .container {
+    width: 1060px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    margin: auto;
+}
+
+.section {
+    /* text-align: left; */
+    /* margin-left: 100px; */
+    width: 80px;
+    /* margin: auto; */
+}
+
+.section h3 {
+    /* margin: auto; */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.section ul li a {
+    color: #666;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.section ul li a:hover {
+    color: brown;
+}
+
+
+
+
+.warning-container {
+    text-align: center;
+    /* background-color:  #e5e4e4a1; */
+    /* padding: 20px; */
+    /* margin-bottom: 0px; */
+    border-radius: 5px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    margin: auto;
+    max-width: 960px;
+}
+
+.warning-text {
+    color: #666;
+    line-height: 2;
+    font-size: 16px;
+}
+
+
+.book-detail-container {
+    display: flex;
+    width: 1100px;
+    margin: auto;
+    gap: 40px;
+}
+
+/* .book-image-section {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 50px;
+} */
+
+/* .main-book-img {
+    width: 320px;
+    height: 420px;
+    object-fit: cover;
+    margin-bottom: 10px;
+} */
+
+.book-detail-container .content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.img-zoom-container {
+    position: relative;
+    display: inline-block;
+}
+
+#main-img {
+    width: 400px;
+    /* 可根据需要调整 */
+}
+
+#lens {
+    position: absolute;
+    border: 2px solid #d4d4d4;
+    width: 100px;
+    height: 100px;
+    opacity: 0.4;
+    background: #fff;
+    cursor: crosshair;
+    display: none;
+    /* 初始隐藏 */
+    pointer-events: none;
+}
+
+#result {
+    position: absolute;
+    width: 375px;
+    height: 375px;
+    border: 1px solid #d4d4d4;
+    /* margin-left: 20px; */
+    left: 650px;
+    background-repeat: no-repeat;
+     background-size: 1600px 1600px; /*根据放大倍数调整 */
+    display: none;
+    /* 初始隐藏 */
+}
+
+
+.book-info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.book-title {
+    font-size: 22px;
+    margin-top: 30px;
+}
+
+.book-authors {
+    color: #666;
+    margin-bottom: 18px;
+    font-size: 18px;
+}
+
+.price-container {
+    display: flex;
+    align-items: baseline;
+    margin-top: 30px;
+    /* 使文本基线对齐 */
+}
+
+.sale {
+    margin-right: 10px;
+    /* 标签与价格之间的间距 */
+    font-size: 24px;
+    color: #333;
+}
+
+.sale-price {
+    font-size: 24px;
+    color: brown;
+}
+
+.original-price {
+    font-size: 18px;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 10px;
+    /* 原价划线 */
+}
+
+.book-price .label {
+    font-size: 16px;
+    color: #333;
+}
+
+.book-price {
+    margin-top: 100px;
+    font-size: 24px;
+    color: brown;
+    margin-bottom: 20px;
+}
+
+.book-actions {
+    display: flex;
+    gap: 24px;
+    margin-top: 50px;
+}
+
+.add-cart {
+    padding: 12px 36px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    background: #fff;
+    color: brown;
+    border: 1px solid brown;
+    /* transition: background 0.2s; */
+}
+
+.buy-now {
+    padding: 12px 36px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    background: brown;
+    color: #fff;
+
+}

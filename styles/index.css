@@ -1,0 +1,347 @@
+body,
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+th,
+td,
+dl,
+dd,
+form,
+fieldset,
+legend,
+input,
+textarea,
+select {
+    margin: 0;
+    padding: 0
+}
+li {
+    list-style: none;
+}
+
+
+
+.banner {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner_wraper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.banner_wraper_list {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.banner_wraper_list_item {
+    width: 100%;
+    height: 100%;
+    float: left;
+     min-width: 100%;
+    flex-shrink: 0;
+}
+
+.banner_wraper_list_item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner_wraper_left_btn,
+.banner_wraper_right_btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10;
+}
+
+.banner_wraper_left_btn {
+    left: 20px;
+}
+
+.banner_wraper_right_btn {
+    right: 20px;
+}
+
+.banner_wraper_btn_box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.banner_wraper_btn_box span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.banner_wraper_btn_box span.active {
+    background: #fff;
+}
+.moudle {
+    width: 1105px;
+    height: 600px;
+    margin: auto;
+}
+.moudle .tittle {
+    justify-content: space-between;
+    display: flex;
+    height: 60px;
+    background-color: white;
+}
+.moudle .tittle .sub_tittle {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.moudle .tittle .nav { 
+    /* margin-top: 15px; */
+    display: flex;
+    align-items: center;
+}
+.moudle .tittle .nav_item {
+    border-radius: 20px;
+    text-align: center;
+    width: 100px;
+}
+.moudle .tittle .nav_item:hover {
+    background-color: brown;
+    color: white;
+}
+.moudle .nav_item.active{
+    display: block;
+}
+.moudle .container {
+    display: flex;
+    width: 1110px;
+    height: 540px;
+}
+.moudle .photo {
+    width: 200px;
+    height: 540px;
+}
+.moudle .photo .thumbile {
+    width: 200px;
+    height: 540px;
+}
+.moudle .content {
+    display: none;
+    width: 910px;
+    height: 540px;
+    flex-wrap: wrap;
+}
+.moudle .content.show {
+    display: flex;
+}
+.moudle .content_item {
+    background-color: white;
+    width: 225px;
+    height: 269px;
+    border: 0.5px solid rgb(208, 206, 206);
+}
+.moudle .content_item .thumbile{
+    margin-top: 3px;
+    /* display: none; */
+    width: 210px;
+    height: 190px;
+    cursor: pointer;
+}
+.des {
+    text-align: center;
+    cursor: pointer;
+    margin-top: 5px;
+    white-space: nowrap; /* 防止换行 */
+    overflow: hidden; /* 超出部分隐藏 */
+    text-overflow: ellipsis; /* 超出部分用省略号表示 */
+    width: 225px;
+}
+.moudle .content .content_item p:hover {
+    color: brown;
+}
+.moudle .content .price {
+    display: flex;
+    margin-left: 40px;
+    color: brown;
+    font-size: 16px;
+    margin-top: 5px;
+}
+.moudle .content .original-price {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 14px;
+    margin-left: 15px;
+    margin-top: 3px;
+}
+
+
+.book-section {
+    display: flex;
+    margin: auto;
+    width: 1105px;
+    height: 158px;
+    justify-content: space-around;
+    padding: 8px 8px;
+}
+
+.book-item {
+    width: 360px;
+    height: 158px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.book-item img {
+    width: 360px;
+    height: auto;
+    display: block;
+}
+
+
+.footer {
+    width: 100%;
+    background-color:  #e5e4e4a1;
+}
+
+.footer .container1 {
+    border-bottom: 1px solid #ccc;
+}
+
+.footer .content {
+    margin: auto;
+    width: 1105px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background-color: #ebebeb;
+    
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 调整图标和文本之间的间距 */
+}
+
+.icon {
+    width: 30px; /* 根据实际需要调整大小 */
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    background-color: brown; /* 图标背景颜色 */
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.item span:last-child {
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.footer .container {
+    width: 1060px;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    margin: auto;
+}
+
+.section {
+    /* text-align: left; */
+    /* margin-left: 100px; */
+    width: 80px;
+    /* margin: auto; */
+}
+
+.section h3 {
+    /* margin: auto; */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.section ul li a {
+    color: #666;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.section ul li a:hover {
+    color: brown;
+}
+
+
+
+
+.warning-container {
+    text-align: center;
+    /* background-color:  #e5e4e4a1; */
+    /* padding: 20px; */
+    /* margin-bottom: 0px; */
+    border-radius: 5px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    margin: auto ;
+    max-width: 960px;
+    margin-bottom: 10px  ;
+}
+
+.warning-text {
+    color:#666;
+    line-height: 2;
+}
+
+
+.top_btn {
+width: 80px;
+height: 60px;
+background-color:brown;
+position: fixed;
+bottom: 100px;
+right: 50px;
+padding: 10px 5px;
+color: white;
+text-align: center;
+font-size: 16px; 
+cursor: pointer;
+}
