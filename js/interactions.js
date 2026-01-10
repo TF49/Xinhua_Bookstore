@@ -1,0 +1,913 @@
+document.addEventListener('DOMContentLoaded', function() {
+    initCategoryNavigation();
+    initAddToCartInteraction();
+    initSearchEnhancement();
+    initScrollAnimations();
+    initHoverCardEffects();
+    initLazyLoading();
+    initScrollToTopButton();
+    initQuickViewModal();
+    initBookmarkInteraction();
+    initQuantitySelector();
+    initLoadingAnimation();
+});
+
+function initCategoryNavigation() {
+    const navItems = document.querySelectorAll('.nav_item');
+    const contents = document.querySelectorAll('.content');
+    
+    navItems.forEach((item, index) => {
+        item.addEventListener('click', function() {
+            navItems.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
+            
+            contents.forEach((content, contentIndex) => {
+                content.style.display = contentIndex === index ? 'flex' : 'none';
+                content.style.opacity = '0';
+                content.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    content.style.transition = 'all 0.4s ease';
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                }, 50 * contentIndex);
+            });
+        });
+        
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.letterSpacing = '2px';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.letterSpacing = '1px';
+        });
+    });
+    
+    if (navItems.length > 0) {
+        navItems[0].classList.add('active');
+        contents.forEach((content, index) => {
+            if (index !== 0) content.style.display = 'none';
+        });
+    }
+}
+
+function initAddToCartInteraction() {
+    const cartButtons = document.querySelectorAll('.add-to-cart-btn');
+    const cartIcon = document.querySelector('.cart');
+    let cartCount = 0;
+    
+    cartButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const contentItem = this.closest('.content_item');
+            const bookTitle = contentItem.querySelector('.des').textContent;
+            const priceElement = contentItem.querySelector('.price');
+            const priceText = priceElement.firstChild.textContent.trim();
+            
+            this.textContent = '✓ 已添加';
+            this.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+            
+            cartCount++;
+            updateCartCount(cartCount);
+            
+            showAddToCartNotification(bookTitle, priceText);
+            
+            setTimeout(() => {
+                this.textContent = '加入购物车';
+                this.style.background = 'linear-gradient(135deg, #c41e3a 0%, #8b0000 100%)';
+            }, 2000);
+        });
+        
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(-50%) scale(1.05)';
+            this.style.boxShadow = '0 6px 20px rgba(196, 30, 58, 0.4)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(-50%) scale(1)';
+            this.style.boxShadow = '0 4px 12px rgba(196, 30, 58, 0.3)';
+        });
+    });
+    
+    function updateCartCount(count) {
+        if (cartIcon) {
+            const countMatch = cartIcon.innerHTML.match(/\d+/);
+            if (countMatch) {
+                cartIcon.innerHTML = cartIcon.innerHTML.replace(
+                    countMatch[0],
+                    `<span class="cart-count-animate">${count}</span>`
+                );
+                
+                const countElement = cartIcon.querySelector('.cart-count-animate');
+                if (countElement) {
+                    countElement.style.animation = 'bounce 0.5s ease';
+                }
+            }
+        }
+    }
+    
+    function showAddToCartNotification(title, price) {
+        const notification = document.createElement('div');
+        notification.className = 'cart-notification';
+        notification.innerHTML = `
+            <div class="notification-content">
+                <span class="notification-icon">📚</span>
+                <div class="notification-text">
+                    <strong>已加入购物车</strong>
+                    <p>${title}</p>
+                    <span class="notification-price">${price}</span>
+                </div>
+            </div>
+        `;
+        
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid #e8e6e3;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            max-width: 280px;
+            animation: slideInRight 0.4s ease, fadeOut 0.5s ease 2.5s forwards;
+            cursor: pointer;
+        `;
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; transform: translateY(-10px); }
+            }
+            @keyframes bounce {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.3); }
+            }
+            .cart-notification:hover {
+                transform: scale(1.02);
+            }
+            .notification-content {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .notification-icon {
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+                border-radius: 6px;
+                color: white;
+                font-size: 14px;
+            }
+            .notification-icon::before {
+                content: '';
+                width: 14px;
+                height: 14px;
+                -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'/%3E%3C/svg%3E") center/contain no-repeat;
+                mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'/%3E%3C/svg%3E") center/contain no-repeat;
+            }
+            .notification-text strong {
+                color: #2d3436;
+                display: block;
+                margin-bottom: 4px;
+            }
+            .notification-text p {
+                color: #636e72;
+                font-size: 13px;
+                margin: 0 0 4px 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .notification-price {
+                color: #c41e3a;
+                font-weight: 600;
+            }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(notification);
+        
+        notification.addEventListener('click', function() {
+            this.remove();
+        });
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 3000);
+    }
+}
+
+function initSearchEnhancement() {
+    const searchInput = document.querySelector('.search-input');
+    const searchButton = document.querySelector('.search-button');
+    const contentItems = document.querySelectorAll('.content_item');
+    
+    if (searchInput) {
+        searchInput.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+            this.parentElement.style.boxShadow = '0 4px 20px rgba(196, 30, 58, 0.15)';
+        });
+        
+        searchInput.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+            this.parentElement.style.boxShadow = 'none';
+        });
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            highlightSearchResults(searchTerm);
+        });
+    }
+    
+    if (searchButton) {
+        searchButton.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            if (searchTerm) {
+                performSearch(searchTerm);
+            }
+        });
+        
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchButton.click();
+            }
+        });
+    }
+    
+    function highlightSearchResults(term) {
+        contentItems.forEach(item => {
+            const title = item.querySelector('.des').textContent.toLowerCase();
+            const price = item.querySelector('.price').textContent.toLowerCase();
+            
+            if (title.includes(term) || price.includes(term)) {
+                item.style.opacity = '1';
+                item.style.transform = 'scale(1)';
+                item.style.boxShadow = '0 8px 24px rgba(196, 30, 58, 0.2)';
+            } else if (term !== '') {
+                item.style.opacity = '0.3';
+                item.style.transform = 'scale(0.95)';
+                item.style.boxShadow = 'none';
+            } else {
+                item.style.opacity = '1';
+                item.style.transform = 'scale(1)';
+                item.style.boxShadow = '';
+            }
+        });
+    }
+    
+    function performSearch(term) {
+        const matchingItems = [];
+        contentItems.forEach(item => {
+            const title = item.querySelector('.des').textContent.toLowerCase();
+            if (title.includes(term)) {
+                matchingItems.push(item);
+            }
+        });
+        
+        if (matchingItems.length > 0) {
+            showSearchResults(term, matchingItems.length);
+        } else {
+            showNoResultsMessage(term);
+        }
+    }
+    
+    function showSearchResults(term, count) {
+        const message = document.createElement('div');
+        message.className = 'search-results-message';
+        message.innerHTML = `
+            <span class="results-icon"></span>
+            <span class="results-text">找到 "<strong>${term}</strong>" 相关图书 <strong>${count}</strong> 本</span>
+        `;
+        
+        message.style.cssText = `
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(196, 30, 58, 0.3);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeInDown 0.3s ease;
+        `;
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInDown {
+                from { transform: translateX(-50%) translateY(-20px); opacity: 0; }
+                to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            }
+            .results-icon {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .results-icon::before {
+                content: '';
+                width: 18px;
+                height: 18px;
+                -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E") center/contain no-repeat;
+                mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E") center/contain no-repeat;
+                background: white;
+            }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+            message.style.animation = 'fadeOutUp 0.3s ease forwards';
+            setTimeout(() => message.remove(), 300);
+        }, 3000);
+    }
+    
+    function showNoResultsMessage(term) {
+        const message = document.createElement('div');
+        message.className = 'no-results-message';
+        message.innerHTML = `
+            <span class="results-icon empty"></span>
+            <span class="results-text">未找到 "<strong>${term}</strong>" 相关图书</span>
+        `;
+        
+        message.style.cssText = `
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #636e72 0%, #2d3436 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: shake 0.5s ease;
+        `;
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(-50%); }
+                25% { transform: translateX(calc(-50% - 10px)); }
+                75% { transform: translateX(calc(-50% + 10px)); }
+            }
+            .results-icon.empty {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .results-icon.empty::before {
+                content: '';
+                width: 18px;
+                height: 18px;
+                -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4'/%3E%3C/svg%3E") center/contain no-repeat;
+                mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4'/%3E%3C/svg%3E") center/contain no-repeat;
+                background: white;
+            }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(message);
+        
+        setTimeout(() => message.remove(), 3000);
+    }
+}
+
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    const contentItems = document.querySelectorAll('.content_item');
+    contentItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = `all 0.5s ease ${index * 0.1}s`;
+        observer.observe(item);
+    });
+    
+    const bookSections = document.querySelectorAll('.book-section');
+    bookSections.forEach((section, index) => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateX(-30px)';
+        section.style.transition = `all 0.6s ease ${index * 0.2}s`;
+        
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }
+            });
+        }, observerOptions);
+        
+        sectionObserver.observe(section);
+    });
+}
+
+function initHoverCardEffects() {
+    const contentItems = document.querySelectorAll('.content_item');
+    
+    contentItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.zIndex = '10';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.zIndex = '1';
+        });
+        
+        const thumbnail = item.querySelector('.thumbile');
+        if (thumbnail) {
+            thumbnail.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.08)';
+            });
+            
+            thumbnail.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        }
+    });
+}
+
+function initLazyLoading() {
+    const images = document.querySelectorAll('.thumbile');
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.5s ease';
+                
+                img.onload = function() {
+                    img.style.opacity = '1';
+                };
+                
+                if (img.complete) {
+                    img.style.opacity = '1';
+                }
+                
+                imageObserver.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '50px 0px'
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+function initScrollToTopButton() {
+    const toTopBtn = document.createElement('div');
+    toTopBtn.className = 'scroll-to-top';
+    toTopBtn.innerHTML = '↑';
+    toTopBtn.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        .scroll-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(196, 30, 58, 0.4);
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(toTopBtn);
+    
+    toTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            toTopBtn.classList.add('visible');
+        } else {
+            toTopBtn.classList.remove('visible');
+        }
+    });
+}
+
+function initQuickViewModal() {
+    const contentItems = document.querySelectorAll('.content_item');
+    
+    contentItems.forEach(item => {
+        item.style.cursor = 'pointer';
+        
+        item.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('add-to-cart-btn')) {
+                showQuickView(this);
+            }
+        });
+    });
+    
+    function showQuickView(item) {
+        const title = item.querySelector('.des').textContent;
+        const img = item.querySelector('.thumbile').src;
+        const priceText = item.querySelector('.price').firstChild.textContent.trim();
+        const originalPrice = item.querySelector('.original-price')?.textContent.trim() || '';
+        
+        const modal = document.createElement('div');
+        modal.className = 'quick-view-modal';
+        modal.innerHTML = `
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="modal-close">×</button>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img src="${img}" alt="${title}">
+                    </div>
+                    <div class="modal-info">
+                        <h2>${title}</h2>
+                        <div class="modal-price">
+                            <span class="current-price">${priceText}</span>
+                            ${originalPrice ? `<span class="original-price">${originalPrice}</span>` : ''}
+                        </div>
+                        <p class="modal-description">本书详细介绍...（此处可以添加书籍详情）</p>
+                        <div class="modal-actions">
+                            <button class="btn-primary">加入购物车</button>
+                            <button class="btn-secondary">收藏</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            .modal-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(5px);
+            }
+            .modal-content {
+                position: relative;
+                background: white;
+                border-radius: 16px;
+                max-width: 700px;
+                width: 90%;
+                max-height: 90vh;
+                overflow-y: auto;
+                animation: modalSlideIn 0.3s ease;
+            }
+            @keyframes modalSlideIn {
+                from { transform: scale(0.9) translateY(20px); opacity: 0; }
+                to { transform: scale(1) translateY(0); opacity: 1; }
+            }
+            .modal-close {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                width: 36px;
+                height: 36px;
+                border: none;
+                background: #f0f0f0;
+                border-radius: 50%;
+                font-size: 24px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+                z-index: 10;
+            }
+            .modal-close:hover {
+                background: #e74c3c;
+                color: white;
+            }
+            .modal-body {
+                display: flex;
+                gap: 30px;
+                padding: 30px;
+            }
+            .modal-image {
+                flex: 0 0 200px;
+            }
+            .modal-image img {
+                width: 100%;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+            .modal-info {
+                flex: 1;
+            }
+            .modal-info h2 {
+                margin: 0 0 15px 0;
+                color: #2d3436;
+                font-size: 20px;
+            }
+            .modal-price {
+                margin-bottom: 15px;
+            }
+            .current-price {
+                color: #c41e3a;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .modal-info .original-price {
+                color: #b2bec3;
+                text-decoration: line-through;
+                margin-left: 10px;
+                font-size: 16px;
+            }
+            .modal-description {
+                color: #636e72;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+            .modal-actions {
+                display: flex;
+                gap: 15px;
+            }
+            .btn-primary, .btn-secondary {
+                padding: 12px 24px;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            .btn-primary {
+                background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+                color: white;
+            }
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+            }
+            .btn-secondary {
+                background: #f0f0f0;
+                color: #2d3436;
+            }
+            .btn-secondary:hover {
+                background: #e0e0e0;
+            }
+            @media (max-width: 600px) {
+                .modal-body {
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(modal);
+        
+        modal.querySelector('.modal-close').addEventListener('click', () => {
+            modal.remove();
+        });
+        
+        modal.querySelector('.modal-overlay').addEventListener('click', () => {
+            modal.remove();
+        });
+        
+        document.addEventListener('keydown', function closeOnEscape(e) {
+            if (e.key === 'Escape') {
+                modal.remove();
+                document.removeEventListener('keydown', closeOnEscape);
+            }
+        });
+    }
+}
+
+function initBookmarkInteraction() {
+    const contentItems = document.querySelectorAll('.content_item');
+    
+    contentItems.forEach(item => {
+        const bookmarkBtn = document.createElement('button');
+        bookmarkBtn.className = 'bookmark-btn';
+        bookmarkBtn.innerHTML = '♡';
+        bookmarkBtn.title = '收藏';
+        bookmarkBtn.style.cssText = `
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+        `;
+        
+        item.appendChild(bookmarkBtn);
+        
+        item.addEventListener('mouseenter', function() {
+            bookmarkBtn.style.opacity = '1';
+            bookmarkBtn.style.transform = 'scale(1)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            bookmarkBtn.style.opacity = '0';
+            bookmarkBtn.style.transform = 'scale(0.5)';
+        });
+        
+        bookmarkBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (this.innerHTML === '♡') {
+                this.innerHTML = '♥';
+                this.style.color = '#c41e3a';
+                showBookmarkNotification('已收藏');
+            } else {
+                this.innerHTML = '♡';
+                this.style.color = '#636e72';
+                showBookmarkNotification('已取消收藏');
+            }
+        });
+    });
+    
+    function showBookmarkNotification(text) {
+        const notification = document.createElement('div');
+        notification.textContent = text;
+        notification.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(45, 52, 54, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10001;
+            animation: bookmarkPop 0.3s ease;
+        `;
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bookmarkPop {
+                0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+                50% { transform: translate(-50%, -50%) scale(1.1); }
+                100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 300);
+        }, 1500);
+    }
+}
+
+function initQuantitySelector() {
+    const cartIcon = document.querySelector('.cart');
+    
+    if (cartIcon) {
+        cartIcon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.02)';
+            this.style.boxShadow = '0 4px 15px rgba(196, 30, 58, 0.2)';
+        });
+        
+        cartIcon.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+        });
+    }
+}
+
+function initLoadingAnimation() {
+    const body = document.body;
+    
+    const loader = document.createElement('div');
+    loader.className = 'page-loader';
+    loader.innerHTML = `
+        <div class="loader-content">
+            <div class="loader-icon">📚</div>
+            <div class="loader-text">加载中...</div>
+        </div>
+    `;
+    
+    loader.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #faf8f5 0%, #ffffff 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        .loader-content {
+            text-align: center;
+        }
+        .loader-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            animation: bounce 1s ease infinite;
+        }
+        .loader-text {
+            color: #636e72;
+            font-size: 14px;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+    `;
+    document.head.appendChild(style);
+    document.body.insertBefore(loader, document.body.firstChild);
+    
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+            setTimeout(() => loader.remove(), 500);
+        }, 500);
+    });
+}

@@ -81,8 +81,12 @@ body {
     /* 去除链接默认下划线 */
     color: inherit;
     /* 继承父元素颜色 */
-    display: inline-block;
-    /* 使链接成为行内块级元素 */
+    display: contents;
+    /* 使链接不影响flex布局 */
+    width: 100%;
+    /* 确保链接宽度与卡片一致 */
+    height: 100%;
+    /* 确保链接高度与卡片一致 */
 }
 
 .cart {
