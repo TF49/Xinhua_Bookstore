@@ -254,9 +254,14 @@
 
 .c-book-grid {
     display: none;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 18px;
     align-items: stretch;
+    justify-content: center;
+}
+
+.c-book-grid.has-spotlight {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-auto-flow: dense;
 }
 
@@ -443,6 +448,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .c-book-grid.has-spotlight {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .c-book-grid > .c-book-card.is-spotlight {
         grid-template-columns: 1fr;
         grid-column: span 2;
@@ -502,6 +511,10 @@
     .c-book-grid,
     .c-ranking-panel__grid,
     .c-feature-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .c-book-grid.has-spotlight {
         grid-template-columns: 1fr;
     }
 

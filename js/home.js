@@ -200,6 +200,7 @@ function initShelfCardSpotlight() {
 
         function setSpotlight(targetCard = null) {
             const playAnimation = animateLayoutChange();
+            grid.classList.toggle("has-spotlight", Boolean(targetCard));
             cards.forEach((card) => {
                 card.classList.toggle("is-spotlight", card === targetCard);
             });
