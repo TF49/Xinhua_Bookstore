@@ -1,303 +1,345 @@
-.recommend-section {
-    margin-top: 40px;
-    width: 1100px;
-    margin: auto;
+.c-detail-hero,
+.c-detail-story,
+.c-reader-fit-panel,
+.c-recommend-panel {
+    margin-top: 28px;
+    padding: 30px;
 }
 
-.des {
-    text-align: center;
-}
-
-.product-grid {
+.c-detail-hero {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    grid-template-columns: 520px minmax(0, 1fr);
+    gap: 30px;
 }
 
-.product-card {
-    text-align: center;
-}
-
-.product-img {
-    width: 150px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.product-name {
-    text-align: center;
-    white-space: nowrap;
-    /* 防止换行 */
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.product-name:hover {
-    color: brown;
-    cursor: pointer;
-}
-
-.product-price {
-    color: brown;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.footer {
-    width: 100%;
-    background-color: #e5e4e4a1;
-}
-
-.footer .container1 {
-    border-bottom: 1px solid #ccc;
-}
-
-.footer .content {
-    margin: auto;
-    width: 1105px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    background-color: #ebebeb;
-
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    /* 调整图标和文本之间的间距 */
-}
-
-.icon {
-    width: 30px;
-    /* 根据实际需要调整大小 */
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    color: white;
-    background-color: brown;
-    /* 图标背景颜色 */
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.item span:last-child {
-    color: #333;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-
-.footer .container {
-    width: 1060px;
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    margin: auto;
-}
-
-.section {
-    /* text-align: left; */
-    /* margin-left: 100px; */
-    width: 80px;
-    /* margin: auto; */
-}
-
-.section h3 {
-    /* margin: auto; */
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.section ul li a {
-    color: #666;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.section ul li a:hover {
-    color: brown;
-}
-
-
-
-
-.warning-container {
-    text-align: center;
-    /* background-color:  #e5e4e4a1; */
-    /* padding: 20px; */
-    /* margin-bottom: 0px; */
-    border-radius: 5px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    margin: auto;
-    max-width: 960px;
-}
-
-.warning-text {
-    color: #666;
-    line-height: 2;
-    font-size: 16px;
-}
-
-
-.book-detail-container {
-    display: flex;
-    width: 1100px;
-    margin: auto;
-    gap: 40px;
-}
-
-/* .book-image-section {
-    width: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 50px;
-} */
-
-/* .main-book-img {
-    width: 320px;
-    height: 420px;
-    object-fit: cover;
-    margin-bottom: 10px;
-} */
-
-.book-detail-container .content {
-    display: flex;
-    align-items: flex-start;
-}
-
-.img-zoom-container {
+.c-zoom-gallery {
     position: relative;
-    display: inline-block;
+    padding: 18px;
+    border-radius: 32px;
+    background: rgba(255, 255, 255, 0.7);
+    transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.c-zoom-gallery__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    background: linear-gradient(145deg, rgba(138, 31, 36, 0.06), rgba(198, 156, 92, 0.12));
 }
 
 #main-img {
-    width: 400px;
-    /* 可根据需要调整 */
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
 }
 
-#lens {
+.c-zoom-gallery__lens {
     position: absolute;
-    border: 2px solid #d4d4d4;
-    width: 100px;
-    height: 100px;
-    opacity: 0.4;
-    background: #fff;
-    cursor: crosshair;
-    display: none;
-    /* 初始隐藏 */
+    width: 120px;
+    height: 120px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 248, 238, 0.72);
+    background: rgba(255, 248, 238, 0.26);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 0 0 1px rgba(138, 31, 36, 0.16);
+    opacity: 0;
     pointer-events: none;
+    transition: opacity 180ms ease;
 }
 
-#result {
+.c-zoom-gallery__result {
     position: absolute;
-    width: 375px;
-    height: 375px;
-    border: 1px solid #d4d4d4;
-    /* margin-left: 20px; */
-    left: 650px;
+    right: -360px;
+    top: 22px;
+    width: 320px;
+    height: 420px;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    background-color: rgba(255, 255, 255, 0.95);
     background-repeat: no-repeat;
-     background-size: 1600px 1600px; /*根据放大倍数调整 */
-    display: none;
-    /* 初始隐藏 */
+    box-shadow: var(--shadow-lift);
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateX(12px) scale(0.98);
+    transition: opacity 200ms ease, transform 220ms ease;
 }
 
+.c-zoom-gallery__lens.is-visible {
+    opacity: 1;
+}
 
-.book-info-section {
-    flex: 1;
+.c-zoom-gallery__result.is-visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.c-thumbnail-row {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-left: 50px;
-    margin-top: 30px;
+    gap: 12px;
+    margin-top: 16px;
 }
 
-.book-title {
-    font-size: 22px;
-    margin-top: 30px;
+.c-thumbnail-row__item {
+    width: 96px;
+    height: 96px;
+    padding: 6px;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background-color var(--transition);
 }
 
-.book-authors {
-    color: #666;
-    margin-bottom: 18px;
-    font-size: 18px;
+.c-thumbnail-row__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
 }
 
-.price-container {
-    display: flex;
-    align-items: baseline;
-    margin-top: 30px;
-    /* 使文本基线对齐 */
+.c-thumbnail-row__item.is-active {
+    border-color: rgba(138, 31, 36, 0.28);
+    box-shadow: 0 16px 28px rgba(138, 31, 36, 0.12);
 }
 
-.sale {
-    margin-right: 10px;
-    /* 标签与价格之间的间距 */
-    font-size: 24px;
-    color: #333;
+.c-thumbnail-row__item:hover,
+.c-thumbnail-row__item:focus-visible {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.94);
 }
 
-.sale-price {
-    font-size: 24px;
-    color: brown;
+.c-detail-purchase-panel {
+    display: grid;
+    gap: 18px;
 }
 
-.original-price {
-    font-size: 18px;
-    color: #999;
-    text-decoration: line-through;
-    margin-left: 10px;
-    /* 原价划线 */
+.c-detail-purchase-panel h1 {
+    font-size: 44px;
 }
 
-.book-price .label {
+.c-detail-purchase-panel__subtitle {
     font-size: 16px;
-    color: #333;
 }
 
-.book-price {
-    margin-top: 100px;
-    font-size: 24px;
-    color: brown;
-    margin-bottom: 20px;
-}
-
-.book-actions {
+.c-tag-row {
     display: flex;
-    gap: 24px;
-    margin-top: 50px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.add-cart {
-    padding: 12px 36px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    border-radius: 3px;
-    background: #fff;
-    color: brown;
-    border: 1px solid brown;
-    /* transition: background 0.2s; */
+.c-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: rgba(198, 156, 92, 0.14);
+    color: var(--brand);
+    transition: transform var(--transition), background-color var(--transition), color var(--transition);
 }
 
-.buy-now {
-    padding: 12px 36px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    border-radius: 3px;
-    background: brown;
-    color: #fff;
+.c-tag:hover {
+    transform: translateY(-2px);
+    background: rgba(198, 156, 92, 0.22);
+}
 
+.c-price-box {
+    padding: 22px 24px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(138, 31, 36, 0.08), rgba(198, 156, 92, 0.14));
+    border: 1px solid rgba(138, 31, 36, 0.12);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background-color var(--transition);
+}
+
+.c-price-box:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+    border-color: rgba(138, 31, 36, 0.2);
+}
+
+.c-price-box__label {
+    margin-right: 12px;
+    color: var(--ink-soft);
+}
+
+.c-price-box strong {
+    font-size: 38px;
+    color: var(--brand);
+}
+
+.c-price-box__origin {
+    margin-left: 12px;
+    color: var(--ink-muted);
+    text-decoration: line-through;
+}
+
+.c-price-box p {
+    margin: 10px 0 0;
+    color: var(--ink-soft);
+}
+
+.c-info-list {
+    display: grid;
+    gap: 12px;
+}
+
+.c-info-list div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(90, 66, 46, 0.16);
+    transition: color var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.c-info-list span {
+    color: var(--ink-muted);
+}
+
+.c-quantity-panel {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.c-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.82);
+    transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.c-stepper button,
+.c-stepper input {
+    width: 52px;
+    height: 48px;
+    border: none;
+    background: transparent;
+    text-align: center;
+}
+
+.c-stepper button {
+    cursor: pointer;
+    color: var(--brand);
+    font-size: 20px;
+    transition: background-color var(--transition), color var(--transition), transform var(--transition);
+}
+
+.c-stepper:hover {
+    border-color: rgba(138, 31, 36, 0.24);
+    box-shadow: var(--shadow-soft);
+}
+
+.c-stepper button:hover,
+.c-stepper button:focus-visible {
+    color: var(--brand-deep);
+    background: rgba(138, 31, 36, 0.06);
+}
+
+.c-stepper button:active {
+    transform: scale(0.94);
+}
+
+.c-story-grid,
+.c-reader-fit-panel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.c-story-card,
+.c-reader-fit-panel__item {
+    padding: 24px;
+}
+
+.c-reader-fit-panel__item span {
+    display: block;
+    color: var(--brand);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.c-reader-fit-panel__item h3 {
+    margin-top: 14px;
+}
+
+.c-detail-hero:hover .c-zoom-gallery {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+}
+
+.c-detail-hero:hover #main-img {
+    transform: scale(1.02);
+}
+
+.c-info-list div:hover {
+    transform: translateX(4px);
+    border-color: rgba(138, 31, 36, 0.2);
+}
+
+.c-recommend-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+@media (max-width: 1180px) {
+    .c-detail-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .c-zoom-gallery__result {
+        display: none !important;
+    }
+
+    .c-story-grid,
+    .c-reader-fit-panel,
+    .c-recommend-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .c-detail-hero,
+    .c-detail-story,
+    .c-reader-fit-panel,
+    .c-recommend-panel {
+        margin-top: 20px;
+        padding: 22px;
+    }
+
+    .c-detail-purchase-panel h1 {
+        font-size: 32px;
+    }
+
+    .c-price-box strong {
+        font-size: 32px;
+    }
+
+    .c-info-list div,
+    .c-quantity-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .c-thumbnail-row {
+        flex-wrap: wrap;
+    }
+
+    .c-thumbnail-row__item {
+        width: 84px;
+        height: 84px;
+    }
+
+    .c-story-grid,
+    .c-reader-fit-panel,
+    .c-recommend-grid {
+        grid-template-columns: 1fr;
+    }
 }

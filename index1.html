@@ -1,172 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的购物车-新华书店</title>
-    <link rel="stylesheet" href="./styles/common1.css">
+    <title>我的书袋 | 新华书店</title>
+    <meta name="description" content="新华书店静态站空购物车页面，升级为可继续扩展的文化风书袋页。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/index1.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon_logosc1/favicon-32x32.png">
 </head>
 
-<body>
-    <div class="top_menu">
-        <div class="left-section">
-            <span class="greeting">下午好！找到中意的书了吗？</span>
-            <span class="login-register"><a href="#">请登录</a> <a href="#">免费注册</a></span>
-        </div>
-        <div class="right-section">
-            <div class="nav-links">
-                <a href="#">我的学习</a>
-                <a href="#"><img src="./images/gerenzhongxin.png" alt="用户图标"
-                        style="width: 22px; height: 18px; vertical-align: middle;">个人中心</a>
-                <a href="#">我的订单</a>
-                <a href="#">客户服务</a>
-                <a href="#">手机新华</a>
-            </div>
-        </div>
-    </div>
-    <div class="header-container">
-        <img src="./images/logo.png" alt="新华书店网上商城" class="logo">
-        <div class="search-bar">
-            <input type="text" placeholder="活着（余华）" class="search-input">
-            <button class="search-button"><i class="fa fa-search">搜索</i></button>
-        </div>
-    </div>
-    <header class="header">
-        <div class="cart-container">
-            <p>购物车空空的哦~，去看看心仪的商品吧~</p>
-        </div>
-    </header>
+<body class="page-cart">
+    <div class="c-page-shell">
+        <a class="c-skip-link" href="#main-content">跳到主要内容</a>
+        <div class="c-paper-glow c-paper-glow--left"></div>
+        <div class="c-paper-glow c-paper-glow--right"></div>
 
-    div
+        <header class="c-site-topbar">
+            <div class="c-shell c-site-topbar__inner">
+                <div class="c-site-topbar__meta">
+                    <span class="c-badge-dot"></span>
+                    <span>书袋暂时空空的，但灵感可以先装满。</span>
+                </div>
+                <nav class="c-site-topbar__nav" aria-label="辅助导航">
+                    <a href="./index.html">返回首页</a>
+                    <a href="#">我的订单</a>
+                    <a href="#">阅读活动</a>
+                </nav>
+            </div>
+        </header>
 
-    <section class="recommend-section">
-        <h2 class="des">为您推荐</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="./images/tuijian1.png" alt="产品1" class="product-img">
-                <p class="product-name">365天读历史+读文学（全2册）</p>
-                <p class="product-price">¥98.00</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian2.png" alt="产品1" class="product-img">
-                <p class="product-name">名家写给童年的诗（全5册）</p>
-                <p class="product-price">¥199.00</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian3.png" alt="产品1" class="product-img">
-                <p class="product-name">少年国学经典（全4册）</p>
-                <p class="product-price">¥160.00</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian4.png" alt="产品1" class="product-img">
-                <p class="product-name">曾国藩（全3册）</p>
-                <p class="product-price">¥99.00</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian5.png" alt="产品1" class="product-img">
-                <p class="product-name">无与伦比的史记</p>
-                <p class="product-price">¥69.80</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian6.png" alt="产品1" class="product-img">
-                <p class="product-name">给孩子的思维导图（全6册）</p>
-                <p class="product-price">¥148.00</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian7.png" alt="产品1" class="product-img">
-                <p class="product-name">画说经典：孩子必读的成语故事（全3册）</p>
-                <p class="product-price">¥60.00</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian8.png" alt="产品1" class="product-img">
-                <p class="product-name">森林报（全4册）</p>
-                <p class="product-price">¥119.20</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian9.png" alt="产品1" class="product-img">
-                <p class="product-name">朗读者（全8册）</p>
-                <p class="product-price">¥268.00</p>
-            </div>
-            <div class="product-card">
-                <img src="./images/tuijian10.png" alt="产品1" class="product-img">
-                <p class="product-name">少年中国地理（全7册）</p>
-                <p class="product-price">¥698.00</p>
-            </div>
-        </div>
-    </section>
-    <div class="footer">
-        <div class="container1">
-            <div class="content">
-                <div class="item">
-                    <span class="icon">新</span>
-                    <span>新书活动,常有常新</span>
-                </div>
-                <div class="item">
-                    <span class="icon">华</span>
-                    <span>正版图书,华丽生活</span>
-                </div>
-                <div class="item">
-                    <span class="icon">书</span>
-                    <span>专业全面,轻松找书</span>
-                </div>
-                <div class="item">
-                    <span class="icon">店</span>
-                    <span>12000+门店服务</span>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="section">
-                <h3>购物指南</h3>
-                <ul>
-                    <li><a href="#">购物保障</a></li>
-                    <li><a href="#">购物流程</a></li>
-                    <li><a href="#">促销说明</a></li>
-                    <li><a href="#">联系客服</a></li>
-                </ul>
-            </div>
-            <div class="section">
-                <h3>支付方式</h3>
-                <ul>
-                    <li><a href="#">网上支付</a></li>
-                    <li><a href="#">优惠券支付</a></li>
-                    <li><a href="#">扫码付款</a></li>
-                </ul>
-            </div>
-            <div class="section">
-                <h3>配送方式</h3>
-                <ul>
-                    <li><a href="#">配送运费</a></li>
-                    <li><a href="#">商品验收</a></li>
-                    <li><a href="#">订单说明</a></li>
-                </ul>
-            </div>
-            <div class="section">
-                <h3>售后服务</h3>
-                <ul>
-                    <li><a href="#">退换货制度</a></li>
-                    <li><a href="#">申请退换货</a></li>
-                    <li><a href="#">退款时效</a></li>
-                </ul>
-            </div>
-            <div class="section">
-                <h3>新华服务</h3>
-                <ul>
-                    <li><a href="#">关于我们</a></li>
-                    <li><a href="#">大宗采购</a></li>
-                    <li><a href="#">友情链接</a></li>
-                </ul>
-            </div>
-        </div>
+        <header class="c-site-header">
+            <div class="c-shell c-site-header__inner">
+                <a href="./index.html" class="c-brand-mark" aria-label="新华书店首页">
+                    <img src="./images/logo.png" alt="新华书店">
+                    <div class="c-brand-mark__text">
+                        <strong>书袋也是书展的入口</strong>
+                        <span>Save first, choose slowly, read deeply.</span>
+                    </div>
+                </a>
 
-        <div class="warning-container">
-            <p class="warning-text">近期有不法分子利用“刷单”等名义和方式骗取钱财，请广大用户提高警惕！</p>
-            <p class="warning-text">任何以新华互联电子商务有限责任公司或新华书店网上商城名义散布虚假消息、诱导刷单或向个人账户转账等行为均是诈骗行为，请广大用户注意风险，不轻信他人，谨防上当受骗。</p>
-        </div>
+                <div class="c-search-panel">
+                    <label class="u-sr-only" for="cart-search">搜索图书</label>
+                    <input id="cart-search" class="c-search-panel__input" type="text" placeholder="搜索想放进书袋的书，比如：骆驼祥子">
+                    <button class="c-search-panel__button" type="button" data-search-trigger>搜索</button>
+                    <p class="c-search-panel__hint">快捷入口：文学、教材、童书、考试、文创</p>
+                </div>
+
+                <div class="c-header-actions">
+                    <div class="c-mini-card">
+                        <span class="c-mini-card__label">当前状态</span>
+                        <strong class="c-mini-card__value" data-cart-count>0 件藏书</strong>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <section class="c-shell c-cart-filled-panel" data-reveal data-cart-filled hidden>
+                <div class="c-section-heading">
+                    <div>
+                        <span class="c-overline">Reading Bag</span>
+                        <h2>我的书袋</h2>
+                    </div>
+                    <p>这里会读取你刚刚收藏的图书，并保留在浏览器本地，方便继续扩展成真正的静态购物车流程。</p>
+                </div>
+
+                <div class="c-cart-layout">
+                    <div class="c-cart-list" data-cart-list></div>
+                    <aside class="c-cart-summary-card">
+                        <span class="c-overline">Summary</span>
+                        <h3 data-cart-summary>0 本图书</h3>
+                        <strong data-cart-total>￥0.00</strong>
+                        <p>当前是静态课程项目版本，数据仅保存在本地浏览器。</p>
+                        <div class="c-inline-actions">
+                            <a href="./index.html" class="c-button c-button--primary">继续选书</a>
+                            <button type="button" class="c-button c-button--secondary" data-cart-clear>清空书袋</button>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="c-shell c-empty-cart-hero" data-reveal data-cart-empty>
+                <div class="c-empty-cart-hero__illustration">
+                    <div class="c-empty-cart-hero__bag"></div>
+                    <div class="c-empty-cart-hero__orbit c-empty-cart-hero__orbit--one"></div>
+                    <div class="c-empty-cart-hero__orbit c-empty-cart-hero__orbit--two"></div>
+                </div>
+                <div class="c-empty-cart-hero__copy">
+                    <span class="c-overline">Your Reading Bag</span>
+                    <h1>购物车还空着，说明你可以再从容一点挑书。</h1>
+                    <p>把这里做成了“空状态也值得被设计”的页面：既能提示用户继续浏览，也为后续扩展真实购物车逻辑留足位置。</p>
+                    <div class="c-inline-actions">
+                        <a href="./index.html" class="c-button c-button--primary">返回首页继续选书</a>
+                        <a href="#quick-links" class="c-button c-button--secondary">查看快捷分类</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="c-shell c-quick-links-panel" id="quick-links" data-reveal>
+                <div class="c-section-heading">
+                    <div>
+                        <span class="c-overline">Quick Navigation</span>
+                        <h2>你可能在找</h2>
+                    </div>
+                    <p>把原本空白的区域改成几个高复用入口卡片，后面你可以继续接到新的分类页。</p>
+                </div>
+
+                <div class="c-pill-grid">
+                    <a href="./index.html#shelf-section" class="c-pill-card">文学精选</a>
+                    <a href="./index.html#shelf-section" class="c-pill-card">教材教辅</a>
+                    <a href="./index.html#shelf-section" class="c-pill-card">少儿启蒙</a>
+                    <a href="./index.html#shelf-section" class="c-pill-card">历史人文</a>
+                    <a href="./index.html#shelf-section" class="c-pill-card">考试进阶</a>
+                    <a href="./index.html#service-panel" class="c-pill-card">文创活动</a>
+                </div>
+            </section>
+
+            <section class="c-shell c-reading-note-strip" data-reveal>
+                <article>
+                    <span>阅读提示</span>
+                    <h3>先收藏，再比较，再决定买哪一本，这样的作业页面会更像真实商城流程。</h3>
+                </article>
+                <article>
+                    <span>后续可扩展</span>
+                    <h3>下一步可以在这里补“最近浏览”、“猜你喜欢”、“书单清单”与本地存储逻辑。</h3>
+                </article>
+            </section>
+
+            <section class="c-shell c-recommend-panel" data-reveal>
+                <div class="c-section-heading">
+                    <div>
+                        <span class="c-overline">Recommended Grid</span>
+                        <h2>为你推荐</h2>
+                    </div>
+                    <p>推荐区与首页书卡统一，避免每个页面像独立模板。</p>
+                </div>
+
+                <div class="c-recommend-grid">
+                    <article class="c-book-card" data-book-id="history-literature-365" data-book-title="365 天读历史 + 读文学" data-book-category="历史 + 文学" data-book-price="98" data-book-image="./images/tuijian1.png"><div class="c-book-card__media"><img src="./images/tuijian1.png" alt="365天读历史+读文学"><span class="c-book-card__badge">套装</span></div><div class="c-book-card__body"><div class="c-book-card__meta">历史 + 文学</div><h3>365 天读历史 + 读文学</h3><div class="c-price-row"><strong>￥98.00</strong><span>精选</span></div><div class="c-book-card__actions"><button type="button" class="c-chip-button" data-save-book>加入书袋</button></div></div></article>
+                    <article class="c-book-card" data-book-id="poetry-for-childhood" data-book-title="名家写给童年的诗" data-book-category="少儿阅读" data-book-price="199" data-book-image="./images/tuijian2.png"><div class="c-book-card__media"><img src="./images/tuijian2.png" alt="名家写给童年的诗"><span class="c-book-card__badge">童诗</span></div><div class="c-book-card__body"><div class="c-book-card__meta">少儿阅读</div><h3>名家写给童年的诗</h3><div class="c-price-row"><strong>￥199.00</strong><span>全 5 册</span></div><div class="c-book-card__actions"><button type="button" class="c-chip-button" data-save-book>加入书袋</button></div></div></article>
+                    <article class="c-book-card" data-book-id="zengguofan-3" data-book-title="曾国藩（全 3 册）" data-book-category="历史人物" data-book-price="99" data-book-image="./images/tuijian4.png"><div class="c-book-card__media"><img src="./images/tuijian4.png" alt="曾国藩"><span class="c-book-card__badge">人物</span></div><div class="c-book-card__body"><div class="c-book-card__meta">历史人物</div><h3>曾国藩（全 3 册）</h3><div class="c-price-row"><strong>￥99.00</strong><span>收藏版</span></div><div class="c-book-card__actions"><button type="button" class="c-chip-button" data-save-book>加入书袋</button></div></div></article>
+                    <article class="c-book-card" data-book-id="idiom-stories" data-book-title="画说经典：成语故事" data-book-category="儿童国学" data-book-price="60" data-book-image="./images/tuijian7.png"><div class="c-book-card__media"><img src="./images/tuijian7.png" alt="画说经典"><span class="c-book-card__badge">成语</span></div><div class="c-book-card__body"><div class="c-book-card__meta">儿童国学</div><h3>画说经典：成语故事</h3><div class="c-price-row"><strong>￥60.00</strong><span>全 3 册</span></div><div class="c-book-card__actions"><button type="button" class="c-chip-button" data-save-book>加入书袋</button></div></div></article>
+                    <article class="c-book-card" data-book-id="young-china-geography" data-book-title="少年中国地理" data-book-category="知识启蒙" data-book-price="698" data-book-image="./images/tuijian10.png"><div class="c-book-card__media"><img src="./images/tuijian10.png" alt="少年中国地理"><span class="c-book-card__badge">地理</span></div><div class="c-book-card__body"><div class="c-book-card__meta">知识启蒙</div><h3>少年中国地理</h3><div class="c-price-row"><strong>￥698.00</strong><span>全 7 册</span></div><div class="c-book-card__actions"><button type="button" class="c-chip-button" data-save-book>加入书袋</button></div></div></article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="c-site-footer" data-reveal>
+            <div class="c-shell">
+                <div class="c-site-footer__motto">
+                    <span>留</span>
+                    <span>白</span>
+                    <span>也</span>
+                    <span>美</span>
+                    <p>空购物车页不该只是“没内容”，它也可以承担引导、推荐与结构扩展的功能。</p>
+                </div>
+                <div class="c-site-footer__grid">
+                    <div><h3>继续逛逛</h3><a href="./index.html">回到首页</a><a href="./index2.html">主推图书</a><a href="#">专题策展</a></div>
+                    <div><h3>书袋扩展</h3><a href="#">最近浏览</a><a href="#">我的书单</a><a href="#">限时优惠</a></div>
+                    <div><h3>服务帮助</h3><a href="#">支付方式</a><a href="#">配送说明</a><a href="#">售后支持</a></div>
+                    <div><h3>作业延伸</h3><a href="#">本地存储购物车</a><a href="#">商品数量逻辑</a><a href="#">结算页</a></div>
+                </div>
+                <div class="c-site-footer__bottom">
+                    <p>近期有不法分子利用“刷单”等名义骗取钱财，请广大用户提高警惕。</p>
+                    <p class="u-muted">Empty-state cart page redesigned as a reusable static component section.</p>
+                </div>
+            </div>
+        </footer>
+
+        <button type="button" class="c-to-top" aria-label="返回顶部" data-to-top>TOP</button>
     </div>
+
+    <div class="c-toast-stack" aria-live="polite" aria-atomic="true"></div>
+
+    <script type="module" src="./js/shared.js"></script>
+    <script type="module" src="./js/search.js"></script>
+    <script type="module" src="./js/cart.js"></script>
 </body>
 
 </html>

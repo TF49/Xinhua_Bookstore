@@ -1,171 +1,318 @@
-/* body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-} */
-
-.header {
-    text-align: center;
-    margin-bottom: 40px;
+.c-empty-cart-hero,
+.c-quick-links-panel,
+.c-reading-note-strip,
+.c-recommend-panel,
+.c-cart-filled-panel {
+    margin-top: 28px;
+    padding: 30px;
 }
 
-.cart-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-p {
-    font-size: 20px;
-}
-
-.recommend-section {
-    margin-top: 40px;
-    width: 1100px;
-    margin: auto;
-}
-
-.des {
-    text-align: center;
-}
-
-.product-grid {
+.c-cart-layout {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    grid-template-columns: minmax(0, 1.4fr) 320px;
+    gap: 22px;
 }
 
-.product-card {
-    text-align: center;
+.c-cart-list {
+    display: grid;
+    gap: 16px;
 }
 
-.product-img {
-    width: 150px;
-    height: auto;
-    margin-bottom: 10px;
+.c-cart-item,
+.c-cart-summary-card {
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background-color var(--transition);
 }
 
-.product-name {
-    text-align: center;
-    white-space: nowrap;
-    /* 防止换行 */
-    font-size: 14px;
-    margin-bottom: 5px;
+.c-cart-item {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) auto;
+    gap: 18px;
+    padding: 18px;
+    align-items: center;
 }
 
-.product-name:hover {
-    color: brown;
-    cursor: pointer;
+.c-cart-item__cover {
+    height: 140px;
+    border-radius: 22px;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(138, 31, 36, 0.08), rgba(198, 156, 92, 0.18));
+    display: grid;
+    place-items: center;
+    color: var(--brand);
+    font-family: "Noto Serif SC", serif;
+    font-size: 28px;
 }
 
-.product-price {
-    color: brown;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.footer {
+.c-cart-item__cover img {
     width: 100%;
-    background-color: #e5e4e4a1;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
 }
 
-.footer .container1 {
-    border-bottom: 1px solid #ccc;
+.c-cart-item__meta {
+    color: var(--ink-muted);
+    font-size: 13px;
 }
 
-.footer .content {
-    margin: auto;
-    width: 1105px;
-    display: flex;
-    justify-content: space-around;
+.c-cart-item__body h3,
+.c-cart-summary-card h3 {
+    margin: 6px 0 0;
+    font-family: "Noto Serif SC", serif;
+}
+
+.c-cart-item__price {
+    margin-top: 12px;
+    color: var(--brand);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.c-cart-item__actions {
+    display: grid;
+    gap: 12px;
+    justify-items: end;
+}
+
+.c-cart-item__actions input {
+    width: 92px;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid rgba(138, 31, 36, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 251, 245, 0.9);
+    transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.c-cart-item:hover,
+.c-cart-summary-card:hover,
+.c-reading-note-strip article:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: rgba(138, 31, 36, 0.2);
+}
+
+.c-cart-item:hover .c-cart-item__cover img {
+    transform: scale(1.04);
+}
+
+.c-cart-item__actions input:focus {
+    outline: none;
+    border-color: rgba(138, 31, 36, 0.34);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 0 0 5px rgba(138, 31, 36, 0.08);
+}
+
+.c-cart-summary-card {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    padding: 24px;
+    position: sticky;
+    top: 18px;
+}
+
+.c-cart-summary-card strong {
+    color: var(--brand);
+    font-size: 36px;
+}
+
+.c-empty-cart-hero {
+    display: grid;
+    grid-template-columns: 380px minmax(0, 1fr);
     align-items: center;
-    padding: 20px;
-    background-color: #ebebeb;
-
+    gap: 36px;
 }
 
-.item {
+.c-empty-cart-hero__illustration {
+    position: relative;
+    min-height: 320px;
+    border-radius: 32px;
+    background:
+        radial-gradient(circle at 30% 24%, rgba(198, 156, 92, 0.32), transparent 30%),
+        linear-gradient(145deg, rgba(138, 31, 36, 0.12), rgba(255, 255, 255, 0.46));
+}
+
+.c-empty-cart-hero__bag {
+    position: absolute;
+    inset: 72px 88px;
+    border: 2px solid rgba(138, 31, 36, 0.2);
+    border-radius: 36px;
+    background: rgba(255, 251, 245, 0.86);
+    box-shadow: var(--shadow-soft);
+}
+
+.c-empty-cart-hero__bag::before,
+.c-empty-cart-hero__bag::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+}
+
+.c-empty-cart-hero__bag::before {
+    top: -36px;
+    left: 70px;
+    right: 70px;
+    height: 54px;
+    border: 8px solid rgba(138, 31, 36, 0.2);
+    border-bottom: none;
+}
+
+.c-empty-cart-hero__bag::after {
+    left: 46px;
+    right: 46px;
+    bottom: 42px;
+    height: 18px;
+    background: linear-gradient(90deg, rgba(198, 156, 92, 0.08), rgba(138, 31, 36, 0.16), rgba(198, 156, 92, 0.08));
+}
+
+.c-empty-cart-hero__orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed rgba(138, 31, 36, 0.16);
+    animation: cart-orbit 9s linear infinite;
+}
+
+.c-empty-cart-hero__orbit--one {
+    inset: 24px;
+}
+
+.c-empty-cart-hero__orbit--two {
+    inset: 56px;
+    animation-duration: 12s;
+    animation-direction: reverse;
+}
+
+.c-empty-cart-hero__copy h1 {
+    font-size: 48px;
+}
+
+.c-pill-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.c-pill-card {
     display: flex;
     align-items: center;
-    gap: 10px;
-    /* 调整图标和文本之间的间距 */
+    justify-content: center;
+    min-height: 86px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.74);
+    color: var(--ink);
+    font-family: "Noto Serif SC", serif;
+    font-size: 22px;
+    box-shadow: var(--shadow-soft);
 }
 
-.icon {
-    width: 30px;
-    /* 根据实际需要调整大小 */
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    color: white;
-    background-color: brown;
-    /* 图标背景颜色 */
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
+.c-reading-note-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
 }
 
-.item span:last-child {
-    color: #333;
-    font-size: 16px;
-    cursor: pointer;
+.c-reading-note-strip article {
+    padding: 24px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.68);
+    transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition), border-color var(--transition);
 }
 
-
-.footer .container {
-    width: 1060px;
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    margin: auto;
-}
-
-.section {
-    /* text-align: left; */
-    /* margin-left: 100px; */
-    width: 80px;
-    /* margin: auto; */
-}
-
-.section h3 {
-    /* margin: auto; */
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.section ul li a {
-    color: #666;
-    text-decoration: none;
+.c-reading-note-strip span {
     display: block;
-    margin-bottom: 5px;
+    color: var(--brand);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
 
-.section ul li a:hover {
-    color: brown;
+.c-reading-note-strip h3 {
+    margin: 14px 0 0;
+    font-family: "Noto Serif SC", serif;
+    font-size: 28px;
+    line-height: 1.4;
 }
 
-
-
-
-.warning-container {
-    text-align: center;
-    /* background-color:  #e5e4e4a1; */
-    /* padding: 20px; */
-    /* margin-bottom: 0px; */
-    border-radius: 5px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    margin: auto;
-    max-width: 960px;
+.c-recommend-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 18px;
 }
 
-.warning-text {
-    color: #666;
-    line-height: 2;
-    font-size: 16px;
+@keyframes cart-orbit {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 1180px) {
+    .c-empty-cart-hero,
+    .c-cart-layout,
+    .c-pill-grid,
+    .c-reading-note-strip,
+    .c-recommend-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .c-empty-cart-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .c-cart-layout {
+        align-items: start;
+    }
+
+    .c-cart-summary-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .c-empty-cart-hero,
+    .c-quick-links-panel,
+    .c-reading-note-strip,
+    .c-recommend-panel,
+    .c-cart-filled-panel {
+        margin-top: 20px;
+        padding: 22px;
+    }
+
+    .c-empty-cart-hero__copy h1 {
+        font-size: 34px;
+    }
+
+    .c-pill-grid,
+    .c-reading-note-strip,
+    .c-recommend-grid,
+    .c-cart-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .c-pill-card,
+    .c-reading-note-strip h3 {
+        font-size: 20px;
+    }
+
+    .c-cart-item {
+        grid-template-columns: 1fr;
+        justify-items: start;
+    }
+
+    .c-cart-item__cover {
+        width: 120px;
+    }
+
+    .c-cart-item__actions {
+        justify-items: start;
+    }
 }
