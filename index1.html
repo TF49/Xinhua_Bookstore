@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/index1.css">
+    <link rel="stylesheet" href="./styles/react-bits.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon_logosc1/favicon-32x32.png">
 </head>
 
@@ -65,27 +66,27 @@
                 <div class="c-section-heading">
                     <div>
                         <span class="c-overline">Reading Bag</span>
-                        <h2>我的书袋</h2>
+                        <h2><span class="rb-gradient-text">我的书袋</span></h2>
                     </div>
                     <p>这里会读取你刚刚收藏的图书，并保留在浏览器本地，方便继续扩展成真正的静态购物车流程。</p>
                 </div>
 
                 <div class="c-cart-layout">
                     <div class="c-cart-list" data-cart-list></div>
-                    <aside class="c-cart-summary-card">
+                    <aside class="c-cart-summary-card rb-spotlight-card rb-star-border">
                         <span class="c-overline">Summary</span>
                         <h3 data-cart-summary>0 本图书</h3>
                         <strong data-cart-total>￥0.00</strong>
                         <p>当前是静态课程项目版本，数据仅保存在本地浏览器。</p>
                         <div class="c-inline-actions">
-                            <a href="./index.html" class="c-button c-button--primary">继续选书</a>
+                            <a href="./index.html" class="c-button c-button--primary rb-magnet">继续选书</a>
                             <button type="button" class="c-button c-button--secondary" data-cart-clear>清空书袋</button>
                         </div>
                     </aside>
                 </div>
             </section>
 
-            <section class="c-shell c-empty-cart-hero" data-reveal data-cart-empty>
+            <section class="c-shell c-empty-cart-hero rb-spotlight-card rb-glare-hover" data-reveal data-cart-empty>
                 <div class="c-empty-cart-hero__illustration">
                     <div class="c-empty-cart-hero__bag"></div>
                     <div class="c-empty-cart-hero__orbit c-empty-cart-hero__orbit--one"></div>
@@ -93,10 +94,10 @@
                 </div>
                 <div class="c-empty-cart-hero__copy">
                     <span class="c-overline">Your Reading Bag</span>
-                    <h1>购物车还空着，说明你可以再从容一点挑书。</h1>
+                    <h1 data-rb-split>购物车还空着，说明你可以再从容一点挑书。</h1>
                     <p>把这里做成了“空状态也值得被设计”的页面：既能提示用户继续浏览，也为后续扩展真实购物车逻辑留足位置。</p>
                     <div class="c-inline-actions">
-                        <a href="./index.html" class="c-button c-button--primary">返回首页继续选书</a>
+                        <a href="./index.html" class="c-button c-button--primary rb-magnet">返回首页继续选书</a>
                         <a href="#quick-links" class="c-button c-button--secondary">查看快捷分类</a>
                     </div>
                 </div>
@@ -181,6 +182,7 @@
     <script type="module" src="./js/shared.js"></script>
     <script type="module" src="./js/search.js"></script>
     <script type="module" src="./js/cart.js"></script>
+    <script type="module" src="./js/react-bits.js"></script>
 </body>
 
 </html>

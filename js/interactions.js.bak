@@ -68,7 +68,7 @@ function initAddToCartInteraction() {
             const priceElement = contentItem.querySelector('.price');
             const priceText = priceElement.firstChild.textContent.trim();
             
-            this.textContent = 'âœ“ å·²æ·»åŠ ';
+            this.textContent = 'âœ?å·²æ·»åŠ?;
             this.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
             
             cartCount++;
@@ -77,7 +77,7 @@ function initAddToCartInteraction() {
             showAddToCartNotification(bookTitle, priceText);
             
             setTimeout(() => {
-                this.textContent = 'åŠ å…¥è´­ç‰©è½¦';
+                this.textContent = 'åŠ å…¥è´­ç‰©è½?;
                 this.style.background = 'linear-gradient(135deg, #c41e3a 0%, #8b0000 100%)';
             }, 2000);
         });
@@ -291,7 +291,7 @@ function initSearchEnhancement() {
         message.className = 'search-results-message';
         message.innerHTML = `
             <span class="results-icon"></span>
-            <span class="results-text">æ‰¾åˆ° "<strong>${term}</strong>" ç›¸å…³å›¾ä¹¦ <strong>${count}</strong> æœ¬</span>
+            <span class="results-text">æ‰¾åˆ° "<strong>${term}</strong>" ç›¸å…³å›¾ä¹¦ <strong>${count}</strong> æœ?/span>
         `;
         
         message.style.cssText = `
@@ -347,7 +347,7 @@ function initSearchEnhancement() {
         message.className = 'no-results-message';
         message.innerHTML = `
             <span class="results-icon empty"></span>
-            <span class="results-text">æœªæ‰¾åˆ° "<strong>${term}</strong>" ç›¸å…³å›¾ä¹¦</span>
+            <span class="results-text">æœªæ‰¾åˆ?"<strong>${term}</strong>" ç›¸å…³å›¾ä¹¦</span>
         `;
         
         message.style.cssText = `
@@ -495,7 +495,7 @@ function initLazyLoading() {
 function initScrollToTopButton() {
     const toTopBtn = document.createElement('div');
     toTopBtn.className = 'scroll-to-top';
-    toTopBtn.innerHTML = 'â†‘';
+    toTopBtn.innerHTML = 'â†?;
     toTopBtn.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -585,7 +585,7 @@ function initQuickViewModal() {
                         </div>
                         <p class="modal-description">æœ¬ä¹¦è¯¦ç»†ä»‹ç»...ï¼ˆæ­¤å¤„å¯ä»¥æ·»åŠ ä¹¦ç±è¯¦æƒ…ï¼‰</p>
                         <div class="modal-actions">
-                            <button class="btn-primary">åŠ å…¥è´­ç‰©è½¦</button>
+                            <button class="btn-primary">åŠ å…¥è´­ç‰©è½?/button>
                             <button class="btn-secondary">æ”¶è—</button>
                         </div>
                     </div>
@@ -752,7 +752,7 @@ function initBookmarkInteraction() {
     contentItems.forEach(item => {
         const bookmarkBtn = document.createElement('button');
         bookmarkBtn.className = 'bookmark-btn';
-        bookmarkBtn.innerHTML = 'â™¡';
+        bookmarkBtn.innerHTML = 'â™?;
         bookmarkBtn.title = 'æ”¶è—';
         bookmarkBtn.style.cssText = `
             position: absolute;
@@ -789,14 +789,14 @@ function initBookmarkInteraction() {
             e.preventDefault();
             e.stopPropagation();
             
-            if (this.innerHTML === 'â™¡') {
-                this.innerHTML = 'â™¥';
+            if (this.innerHTML === 'â™?) {
+                this.innerHTML = 'â™?;
                 this.style.color = '#c41e3a';
-                showBookmarkNotification('å·²æ”¶è—');
+                showBookmarkNotification('å·²æ”¶è—?);
             } else {
-                this.innerHTML = 'â™¡';
+                this.innerHTML = 'â™?;
                 this.style.color = '#636e72';
-                showBookmarkNotification('å·²å–æ¶ˆæ”¶è—');
+                showBookmarkNotification('å·²å–æ¶ˆæ”¶è—?);
             }
         });
     });
@@ -860,7 +860,7 @@ function initLoadingAnimation() {
     loader.innerHTML = `
         <div class="loader-content">
             <div class="loader-icon">ğŸ“š</div>
-            <div class="loader-text">åŠ è½½ä¸­...</div>
+            <div class="loader-text">åŠ è½½ä¸?..</div>
         </div>
     `;
     
@@ -1031,6 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 function initAdvancedEffects() {
+
     // ========================================================
     // 1. ³õÊ¼»¯ Lenis ¼«ÖÂ¹ßĞÔÆ½»¬¹ö¶¯
     // ========================================================
@@ -1125,66 +1126,3 @@ function initAdvancedEffects() {
         });
     }
 }
-
-// --- ½ô¼±ĞŞ¸´£º·ÖÀë×Ô¶¨Òå¹â±êÂß¼­£¬È·±£ÎŞÂÛÍøÂçÈçºÎ¶¼ÄÜÁ¢¼´Éú³É¹â±ê ---
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. ¶¨ÖÆ»¯´ÅĞÔ¹â±ê (Custom Magnetic Cursor)
-    if (window.matchMedia("(pointer: fine)").matches) {
-        const cursorDot = document.createElement('div');
-        cursorDot.className = 'c-cursor-dot';
-        const cursorRing = document.createElement('div');
-        cursorRing.className = 'c-cursor-ring';
-        
-        document.body.appendChild(cursorDot);
-        document.body.appendChild(cursorRing);
-
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let ringX = mouseX;
-        let ringY = mouseY;
-
-        // ¼àÌıÊó±êÒÆ¶¯
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // Ö÷Ô²µãÃ»ÓĞÑÓ³Ù£¬ËÀËÀÌù×ÅÊó±ê
-            cursorDot.style.left = mouseX + 'px';
-            cursorDot.style.top = mouseY + 'px';
-            
-            // È·±£¹â±êÔªËØ¿É¼û
-            cursorDot.style.display = 'block';
-            cursorRing.style.display = 'block';
-        });
-
-        // Êó±êÒÆ³öÆÁÄ»Ê±Òş²Ø
-        document.addEventListener('mouseleave', () => {
-            cursorDot.style.display = 'none';
-            cursorRing.style.display = 'none';
-        });
-
-        // ÓÃ requestAnimationFrame ÈÃÍâÈ¦²úÉú´øÓĞ×èÄáµÄ¸úËæÑÓ³Ù¸Ğ
-        const renderCursor = () => {
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            
-            cursorRing.style.transform = \	ranslate(calc(-50% + \px), calc(-50% + \px))\;
-            requestAnimationFrame(renderCursor);
-        };
-        requestAnimationFrame(renderCursor);
-
-        // ¼àÌı¿Éµã»÷ÔªËØµÄĞüÍ£×´Ì¬
-        const interactables = document.querySelectorAll('a, button, input, .c-mini-card, .content_item, [data-hero-dots], .c-hero-banner__arrow');
-        
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorDot.classList.add('is-hovering');
-                cursorRing.classList.add('is-hovering');
-            });
-            el.addEventListener('mouseleave', () => {
-                cursorDot.classList.remove('is-hovering');
-                cursorRing.classList.remove('is-hovering');
-            });
-        });
-    }
-});

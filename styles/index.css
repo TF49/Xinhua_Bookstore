@@ -550,3 +550,403 @@
         font-size: 28px;
     }
 }
+
+/* ==============================================================
+   新华书店：现代杂志风视觉升级 (Pure HTML/CSS)
+   ============================================================== */
+
+/* 1. 纸张质感背景与平滑滚动 */
+html {
+    scroll-behavior: smooth;
+    background-color: #FDFBF7;
+}
+
+/* 2. 顶部导航栏毛玻璃特效 */
+.c-site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    /* 为 JS 添加的 .is-scrolled 类准备过渡效果 */
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+}
+.c-site-header.is-scrolled {
+    background-color: rgba(253, 251, 247, 0.85); /* 半透明底色 */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* 3. 滚动加载动画 (配合下方 JS) */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 4. Banner 电影感放大动画 (Ken Burns Effect) */
+.c-hero-banner__slide {
+    overflow: hidden;
+    position: relative;
+}
+/* 利用伪元素承载背景，实现只有背景放大而文字不放大的效果 */
+.c-hero-banner__slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--hero-image);
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    transform: scale(1.08); /* 初始状态稍微放大 */
+    transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+/* 当幻灯片激活时，背景图缓慢回缩 */
+.c-hero-banner__slide.is-active::before {
+    transform: scale(1); 
+}
+
+/* 5. Banner 内部文字元素的错落淡入动画 */
+.c-hero-banner__slide .c-hero-banner__copy > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.c-hero-banner__slide.is-active .c-hero-banner__copy .c-overline { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.c-hero-banner__slide.is-active .c-hero-banner__copy h1,
+.c-hero-banner__slide.is-active .c-hero-banner__copy h2 { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+.c-hero-banner__slide.is-active .c-hero-banner__copy p { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+.c-hero-banner__slide.is-active .c-hero-banner__copy .c-inline-actions { transition-delay: 0.8s; opacity: 1; transform: translateY(0); }
+
+/* 6. 卡片/书籍的优雅悬浮效果 (如果不用 3D JS，仅用 CSS 也极度美观) */
+.c-mini-card,
+.c-product-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+.c-mini-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08), 0 5px 15px rgba(0,0,0,0.04);
+}
+
+/* ==============================================================
+   ====== 强制修复 Banner 高度塌陷和背景图丢失问题 ====== 
+   ============================================================== */
+.c-hero-banner__slide {
+    /* 恢复绝对定位，使其铺满 560px 的父容器 */
+    position: absolute !important;
+    inset: 0;
+    overflow: hidden;
+    /* 清除原本的背景，防止放大时露出底图产生重影 */
+    background: none !important; 
+}
+
+.c-hero-banner__slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* 恢复原有的深色半透明渐变遮罩，否则白色文字看不清 */
+    background: 
+        linear-gradient(110deg, rgba(20, 14, 10, 0.8), rgba(20, 14, 10, 0.24) 52%, rgba(20, 14, 10, 0.16) 100%),
+        var(--hero-image) center / cover no-repeat !important;
+    z-index: -1;
+    transform: scale(1.08);
+    transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.c-hero-banner__slide.is-active::before {
+    transform: scale(1); 
+}
+
+/* Modern curated shelf: inspired by React Bits ChromaGrid, MagicBento and SpotlightCard. */
+.c-shelf-panel {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(138, 31, 36, 0.1);
+    background:
+        radial-gradient(circle at 12% 10%, rgba(198, 156, 92, 0.2), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(76, 121, 83, 0.12), transparent 28%),
+        linear-gradient(135deg, rgba(255, 254, 250, 0.94), rgba(250, 244, 235, 0.86));
+    box-shadow:
+        0 30px 80px rgba(65, 42, 24, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.76);
+}
+
+.c-shelf-panel::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border-radius: calc(var(--radius-xl) - 10px);
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(138, 31, 36, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(138, 31, 36, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(circle at 50% 50%, #000, transparent 78%);
+    opacity: 0.62;
+}
+
+.c-shelf-panel::after {
+    content: "";
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    right: -120px;
+    bottom: -150px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(138, 31, 36, 0.12), transparent 68%);
+    filter: blur(2px);
+}
+
+.c-shelf-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+.c-shelf-panel .c-section-heading {
+    align-items: end;
+}
+
+.c-shelf-panel .c-overline {
+    color: var(--brand);
+}
+
+.c-shelf-panel .c-section-heading p {
+    max-width: 520px;
+    padding: 16px 18px;
+    border: 1px solid rgba(138, 31, 36, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.44);
+    backdrop-filter: blur(14px);
+}
+
+.c-shelf-panel__content {
+    gap: 22px;
+}
+
+.c-category-tabs {
+    width: max-content;
+    max-width: 100%;
+    padding: 6px;
+    border: 1px solid rgba(138, 31, 36, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.58);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 16px 36px rgba(65, 42, 24, 0.08);
+    backdrop-filter: blur(16px);
+}
+
+.c-category-tabs__item {
+    min-height: 42px;
+    border-color: transparent;
+    background: transparent;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.c-category-tabs__item.is-active {
+    background:
+        linear-gradient(135deg, rgba(138, 31, 36, 0.96), rgba(99, 20, 25, 0.96)),
+        var(--brand);
+    box-shadow:
+        0 12px 26px rgba(138, 31, 36, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.c-category-tabs__item:hover,
+.c-category-tabs__item:focus-visible {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.62);
+}
+
+.c-category-tabs__item.is-active:hover,
+.c-category-tabs__item.is-active:focus-visible {
+    background: linear-gradient(135deg, rgba(138, 31, 36, 0.96), rgba(99, 20, 25, 0.96));
+}
+
+.c-shelf-panel .c-book-grid {
+    gap: 20px;
+    perspective: 1200px;
+}
+
+.c-shelf-panel .c-book-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid rgba(138, 31, 36, 0.1);
+    border-radius: 24px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 250, 242, 0.62)),
+        radial-gradient(circle at 20% 0%, rgba(198, 156, 92, 0.14), transparent 34%);
+    box-shadow:
+        0 18px 44px rgba(65, 42, 24, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(14px);
+    transform: translateZ(0);
+}
+
+.c-shelf-panel .c-book-card:nth-child(2n) { --shelf-accent: rgba(76, 121, 83, 0.38); }
+.c-shelf-panel .c-book-card:nth-child(3n) { --shelf-accent: rgba(198, 156, 92, 0.42); }
+.c-shelf-panel .c-book-card:nth-child(4n) { --shelf-accent: rgba(138, 31, 36, 0.34); }
+
+.c-shelf-panel .c-book-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background:
+        radial-gradient(260px circle at var(--rb-mx, 50%) var(--rb-my, 14%), rgba(255, 255, 255, 0.78), transparent 58%),
+        radial-gradient(220px circle at 80% 12%, var(--shelf-accent, rgba(198, 156, 92, 0.42)), transparent 62%);
+    opacity: 0;
+    transition: opacity 280ms ease;
+}
+
+.c-shelf-panel .c-book-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    padding: 1px;
+    background:
+        linear-gradient(130deg, rgba(255, 255, 255, 0.72), transparent 32%),
+        conic-gradient(from 160deg, transparent, rgba(198, 156, 92, 0.6), rgba(76, 121, 83, 0.3), rgba(138, 31, 36, 0.42), transparent);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.38;
+    transition: opacity 280ms ease;
+}
+
+.c-shelf-panel .c-book-card:hover::before,
+.c-shelf-panel .c-book-card:focus-within::before,
+.c-shelf-panel .c-book-card.is-spotlight::before {
+    opacity: 1;
+}
+
+.c-shelf-panel .c-book-card:hover::after,
+.c-shelf-panel .c-book-card:focus-within::after,
+.c-shelf-panel .c-book-card.is-spotlight::after {
+    opacity: 0.92;
+}
+
+.c-shelf-panel .c-book-card__media {
+    margin: 12px 12px 0;
+    border-radius: 18px;
+    background:
+        linear-gradient(135deg, rgba(138, 31, 36, 0.08), rgba(198, 156, 92, 0.18)),
+        rgba(255, 255, 255, 0.62);
+    box-shadow: inset 0 0 0 1px rgba(138, 31, 36, 0.08);
+}
+
+.c-shelf-panel .c-book-card__media img {
+    object-fit: contain;
+    padding: 10px;
+    filter: drop-shadow(0 18px 18px rgba(41, 26, 18, 0.18));
+}
+
+.c-shelf-panel .c-book-card:hover .c-book-card__media img,
+.c-shelf-panel .c-book-card.is-spotlight .c-book-card__media img {
+    transform: scale(1.045) translateY(-4px);
+}
+
+.c-shelf-panel .c-book-card__badge {
+    top: 14px;
+    left: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(31, 24, 19, 0.78);
+    color: #fff8ee;
+    box-shadow: 0 10px 24px rgba(31, 24, 19, 0.18);
+    backdrop-filter: blur(12px);
+}
+
+.c-shelf-panel .c-book-card__body {
+    padding: 18px 20px 22px;
+}
+
+.c-shelf-panel .c-book-card__meta {
+    color: rgba(77, 62, 51, 0.72);
+}
+
+.c-shelf-panel .c-book-card h3 {
+    font-size: 21px;
+    line-height: 1.32;
+}
+
+.c-shelf-panel .c-price-row strong {
+    color: #971f29;
+    font-size: 26px;
+    letter-spacing: 0;
+}
+
+.c-shelf-panel .c-book-card.is-spotlight {
+    border-color: rgba(138, 31, 36, 0.2);
+    background:
+        radial-gradient(circle at 74% 8%, rgba(198, 156, 92, 0.26), transparent 34%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 247, 235, 0.72));
+    box-shadow:
+        0 28px 70px rgba(65, 42, 24, 0.18),
+        0 0 0 1px rgba(198, 156, 92, 0.12);
+}
+
+.c-book-grid > .c-book-card.is-spotlight .c-book-card__media {
+    margin: 12px 0 12px 12px;
+    border-radius: 20px;
+}
+
+.c-book-grid > .c-book-card.is-spotlight .c-book-card__body {
+    padding: 28px 28px 30px;
+}
+
+.c-shelf-panel .c-book-card.is-spotlight p {
+    color: var(--ink-soft);
+    line-height: 1.8;
+}
+
+@media (max-width: 980px) {
+    .c-category-tabs {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .c-shelf-panel .c-book-card__media img {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 640px) {
+    .c-shelf-panel {
+        padding: 22px;
+        border-radius: 28px;
+    }
+
+    .c-shelf-panel .c-section-heading p {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        backdrop-filter: none;
+    }
+
+    .c-category-tabs {
+        border-radius: 20px;
+        padding: 5px;
+    }
+
+    .c-category-tabs__item {
+        flex: 0 0 auto;
+        min-height: 40px;
+        padding-inline: 14px;
+    }
+
+    .c-book-grid > .c-book-card.is-spotlight .c-book-card__media {
+        margin: 12px 12px 0;
+    }
+
+    .c-book-grid > .c-book-card.is-spotlight .c-book-card__body {
+        padding: 20px;
+    }
+}

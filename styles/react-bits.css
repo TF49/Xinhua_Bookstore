@@ -1,0 +1,436 @@
+/* React Bits inspired effects adapted for this static bookstore project. */
+.rb-aurora {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.42;
+    mix-blend-mode: multiply;
+    background:
+        radial-gradient(circle at var(--rb-x, 18%) 12%, rgba(198, 156, 92, 0.38), transparent 28%),
+        radial-gradient(circle at 82% var(--rb-y, 22%), rgba(138, 31, 36, 0.18), transparent 30%),
+        radial-gradient(circle at 50% 86%, rgba(76, 121, 83, 0.16), transparent 32%);
+    filter: blur(18px) saturate(1.15);
+    animation: rb-aurora-drift 14s ease-in-out infinite alternate;
+}
+
+.rb-dot-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image:
+        radial-gradient(circle, rgba(138, 31, 36, 0.24) 1px, transparent 1.5px),
+        linear-gradient(90deg, rgba(198, 156, 92, 0.08) 1px, transparent 1px);
+    background-size: 22px 22px, 88px 88px;
+    mask-image: linear-gradient(90deg, transparent, #000 18%, #000 80%, transparent);
+}
+
+.rb-gradient-text {
+    color: transparent;
+    background: linear-gradient(105deg, #8a1f24 0%, #c69c5c 45%, #4c7953 78%, #8a1f24 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: rb-gradient-slide 5.8s ease-in-out infinite;
+}
+
+.rb-shiny-text {
+    position: relative;
+    color: rgba(255, 248, 238, 0.84);
+    background: linear-gradient(100deg, rgba(255, 248, 238, 0.64), #fff8ee, rgba(255, 248, 238, 0.64));
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: rb-shine 3.2s linear infinite;
+}
+
+.rb-split .rb-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.72em) rotate(2deg);
+    animation: rb-split-rise 680ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--rb-i) * 34ms + 80ms);
+}
+
+.rb-rotating-text {
+    display: inline-grid;
+    min-width: 7.5em;
+    vertical-align: baseline;
+}
+
+.rb-rotating-text span {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(0.62em);
+    transition: opacity 360ms ease, transform 360ms ease;
+}
+
+.rb-rotating-text span.is-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rb-velocity-strip {
+    overflow: hidden;
+    border-block: 1px solid rgba(138, 31, 36, 0.16);
+    background: rgba(255, 251, 245, 0.48);
+}
+
+.rb-velocity-strip__track {
+    display: flex;
+    width: max-content;
+    animation: rb-scroll-x 26s linear infinite;
+}
+
+.rb-velocity-strip__line {
+    display: flex;
+    gap: 18px;
+    padding: 12px 9px;
+    white-space: nowrap;
+}
+
+.rb-velocity-strip__line span {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--brand);
+    font-family: "Noto Serif SC", serif;
+    font-size: clamp(18px, 2vw, 28px);
+}
+
+.rb-spotlight-card,
+.rb-tilted-card,
+.rb-glare-hover {
+    position: relative;
+    isolation: isolate;
+}
+
+.rb-spotlight-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: var(--rb-spot-opacity, 0);
+    background: radial-gradient(280px circle at var(--rb-mx, 50%) var(--rb-my, 50%), rgba(198, 156, 92, 0.34), transparent 62%);
+    transition: opacity 180ms ease;
+}
+
+.rb-tilted-card {
+    transform-style: preserve-3d;
+    transform: perspective(900px) rotateX(var(--rb-tilt-y, 0deg)) rotateY(var(--rb-tilt-x, 0deg)) translateY(var(--rb-lift, 0));
+}
+
+.rb-glare-hover {
+    overflow: hidden;
+}
+
+.rb-glare-hover::after {
+    content: "";
+    position: absolute;
+    inset: -50% -80%;
+    z-index: 3;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.46) 50%, transparent 62%);
+    transform: translateX(-72%) rotate(6deg);
+    transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rb-glare-hover:hover::after,
+.rb-glare-hover:focus-within::after {
+    transform: translateX(72%) rotate(6deg);
+}
+
+.c-shelf-panel .rb-glare-hover::after {
+    display: none;
+}
+
+.rb-magnet {
+    will-change: transform;
+}
+
+.rb-star-border {
+    position: relative;
+    overflow: hidden;
+}
+
+.rb-star-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: conic-gradient(from var(--rb-angle, 0deg), transparent, rgba(198, 156, 92, 0.9), transparent 28%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rb-border-spin 4.4s linear infinite;
+}
+
+.rb-animated-list > * {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+.rb-animated-list.is-revealed > * {
+    animation: rb-list-in 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--rb-i, 0) * 88ms);
+}
+
+.rb-bits-lab {
+    margin-top: 28px;
+    padding: 30px;
+    overflow: hidden;
+}
+
+.rb-bits-lab__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 18px;
+}
+
+.rb-bits-lab__hero,
+.rb-bits-lab__panel,
+.rb-bits-lab__stack {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 251, 245, 0.76);
+    box-shadow: var(--shadow-soft);
+}
+
+.rb-bits-lab__hero {
+    min-height: 360px;
+    display: grid;
+    align-content: end;
+    gap: 18px;
+    padding: 30px;
+    overflow: hidden;
+    background:
+        linear-gradient(130deg, rgba(31, 24, 19, 0.82), rgba(138, 31, 36, 0.58)),
+        url("../images/banner4.webp") center / cover no-repeat;
+    color: #fff8ee;
+}
+
+.rb-bits-lab__hero h3 {
+    max-width: 640px;
+    margin: 0;
+    font-family: "Noto Serif SC", serif;
+    font-size: clamp(34px, 5vw, 64px);
+    line-height: 1.08;
+}
+
+.rb-bits-lab__hero p {
+    max-width: 560px;
+    margin: 0;
+    color: rgba(255, 248, 238, 0.84);
+}
+
+.rb-bits-lab__metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.rb-bits-lab__metric {
+    padding: 16px;
+    border-radius: 20px;
+    background: rgba(255, 251, 245, 0.16);
+    border: 1px solid rgba(255, 251, 245, 0.22);
+    backdrop-filter: blur(10px);
+}
+
+.rb-bits-lab__metric strong {
+    display: block;
+    font-size: 28px;
+    line-height: 1;
+}
+
+.rb-bits-lab__metric span {
+    display: block;
+    margin-top: 8px;
+    color: rgba(255, 248, 238, 0.78);
+    font-size: 13px;
+}
+
+.rb-bits-lab__stack {
+    display: grid;
+    gap: 14px;
+    padding: 18px;
+}
+
+.rb-bits-lab__panel {
+    padding: 22px;
+}
+
+.rb-bits-lab__panel h3 {
+    margin: 0 0 12px;
+    font-family: "Noto Serif SC", serif;
+    font-size: 24px;
+}
+
+.rb-bits-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.rb-bits-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.62);
+    color: var(--ink-soft);
+}
+
+.rb-bits-list strong {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.rb-bits-tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.rb-bits-tag-cloud span {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(138, 31, 36, 0.08);
+    color: var(--brand);
+    font-size: 13px;
+}
+
+.rb-click-spark {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10001;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.rb-click-spark i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--accent);
+    transform-origin: 50% 0;
+    animation: rb-spark 520ms ease-out forwards;
+}
+
+@keyframes rb-aurora-drift {
+    from { --rb-x: 12%; --rb-y: 18%; transform: translate3d(0, 0, 0) scale(1); }
+    to { --rb-x: 30%; --rb-y: 34%; transform: translate3d(0, -18px, 0) scale(1.04); }
+}
+
+@keyframes rb-gradient-slide {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+}
+
+@keyframes rb-shine {
+    from { background-position: 180% center; }
+    to { background-position: -40% center; }
+}
+
+@keyframes rb-split-rise {
+    to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes rb-scroll-x {
+    to { transform: translateX(-50%); }
+}
+
+@keyframes rb-border-spin {
+    to { --rb-angle: 360deg; }
+}
+
+@keyframes rb-list-in {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rb-spark {
+    from { opacity: 1; transform: rotate(var(--rb-rotate)) translateY(0) scaleY(1); }
+    to { opacity: 0; transform: rotate(var(--rb-rotate)) translateY(-30px) scaleY(0.2); }
+}
+
+@media (max-width: 1180px) {
+    .rb-bits-lab__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .rb-bits-lab {
+        padding: 22px;
+    }
+
+    .rb-bits-lab__hero {
+        min-height: 440px;
+        padding: 22px;
+    }
+
+    .rb-bits-lab__metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .rb-bits-list li {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rb-aurora,
+    .rb-gradient-text,
+    .rb-shiny-text,
+    .rb-velocity-strip__track,
+    .rb-star-border::before,
+    .rb-split .rb-char,
+    .rb-animated-list.is-revealed > *,
+    .rb-click-spark i {
+        animation: none !important;
+    }
+
+    .rb-split .rb-char,
+    .rb-animated-list > * {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Remove hairline artifacts from shelf cards; keep the soft glow only. */
+.c-shelf-panel .c-book-card::after {
+    inset: 0;
+    padding: 0;
+    border: 1px solid rgba(138, 31, 36, 0.12);
+    background: none;
+    -webkit-mask: none;
+    mask: none;
+    opacity: 1;
+}
+
+.c-shelf-panel .c-book-card:hover::after,
+.c-shelf-panel .c-book-card:focus-within::after,
+.c-shelf-panel .c-book-card.is-spotlight::after {
+    border-color: rgba(198, 156, 92, 0.34);
+    opacity: 1;
+}
+
+.c-shelf-panel .c-book-card__media::before,
+.c-shelf-panel .c-book-card__media::after,
+.c-shelf-panel .c-book-card__body::before,
+.c-shelf-panel .c-book-card__body::after {
+    display: none;
+}

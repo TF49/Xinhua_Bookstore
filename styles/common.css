@@ -32,6 +32,7 @@ html {
 
 body {
     margin: 0;
+    overflow-x: hidden;
     background:
         radial-gradient(circle at top left, rgba(198, 156, 92, 0.2), transparent 34%),
         radial-gradient(circle at 86% 10%, rgba(138, 31, 36, 0.12), transparent 26%),
@@ -482,7 +483,7 @@ input {
 .c-reader-fit-panel__item,
 .c-pill-card,
 .c-thumbnail-row__item {
-    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .c-book-card:hover,
@@ -493,6 +494,7 @@ input {
 .c-reader-fit-panel__item:hover,
 .c-pill-card:hover,
 .c-thumbnail-row__item:hover {
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lift);
     border-color: rgba(138, 31, 36, 0.24);
 }
@@ -512,11 +514,11 @@ input {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 320ms ease;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .c-book-card:hover .c-book-card__media img {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .c-book-card__badge {
@@ -912,4 +914,254 @@ input {
         opacity: 0;
         transform: translateY(-8px) scale(0.98);
     }
+}
+
+/* ==============================================================
+   ����˿������������SPA��ҳ��������������
+   ============================================================== */
+
+/* 1. ȫ��ҳ����ص������ (����ҳ��ʱƽ������) */
+body {
+    animation: smoothPageLoad 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes smoothPageLoad {
+    0% { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* �˳�ҳ��ʱ���� (�� JS ����) */
+body.is-exiting {
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 2. �Ż�ȫ����������Ĺ������� (ʹ������и�ǿ�Ļ�������) */
+a, 
+button, 
+.c-button, 
+.content_item, 
+.c-mini-card,
+.nav_item {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* 3. ǿ�ƿ���Ӳ������ (GPU ����)������������֡�Ϳ��� */
+.content_item, 
+.c-mini-card, 
+.c-hero-banner__slide,
+.animate-in,
+[data-reveal] {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* ==============================================================
+   ====== �޸���Ϣ���� (Toast) �뵼�����ص������� ====== 
+   ============================================================== */
+.c-toast-stack {
+    /* �����������ƶ����ܿ����������� */
+    top: 100px !important; 
+    right: 30px !important;
+    /* ��߲㼶��ȷ�����ᱻ�����Ԫ���ڵ� */
+    z-index: 9999 !important; 
+    /* ���ӵ���֮��ļ�� */
+    gap: 16px !important;
+}
+
+.c-toast {
+    /* ����߼���־���ë������Ч */
+    background: rgba(255, 251, 245, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(138, 31, 36, 0.2) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+    padding: 16px 24px !important;
+    border-radius: 12px !important;
+    /* �Ż������Ű� */
+    color: #4a3e3d !important;
+    font-family: 'Noto Serif SC', serif !important;
+}
+
+.c-toast strong {
+    color: #8a1f24 !important; /* �»����� */
+    font-size: 16px !important;
+    margin-bottom: 6px !important;
+    letter-spacing: 1px !important;
+}
+
+.c-toast span {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #665c5a !important;
+}
+
+/* ==============================================================
+   ====== ϸ���ʸ���������������ѡ���ı������ʽ���� ====== 
+   ============================================================== */
+
+/* 1. ȫ����־�����Ź����� */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #FDFBF7; /* ���ϱ�����ֽ��ɫ */
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(138, 31, 36, 0.25); /* �»���ĵ͵�͸���� */
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(138, 31, 36, 0.6); /* ��ͣʱ���� */
+}
+
+/* 2. ѡ���ı���������ɫ */
+::selection {
+    background-color: rgba(138, 31, 36, 0.15); /* ���ŵĺ�ɫ���� */
+    color: #8a1f24;
+    text-shadow: none;
+}
+
+/* 3. �������������ֵĸ߼���ͣ�»��߶�Ч */
+.c-site-topbar__nav a {
+    position: relative;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.c-site-topbar__nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: #8a1f24;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.c-site-topbar__nav a:hover {
+    color: #8a1f24;
+}
+.c-site-topbar__nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* 4. ͼƬ������������ (Ӫ����������) */
+img {
+    transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+a:hover > img {
+    filter: brightness(1.05) contrast(1.02);
+}
+
+/* ==============================================================
+   ====== ������ҳ��Ч�����ƹ����ƽ������׼�� ====== 
+   ============================================================== */
+
+/* 1. ���ƹ�� (Custom Cursor) */
+/* ����ԭ����� (���ǵ����飬ֻ�����������) */
+@media (pointer: fine) {
+    body, a, button, input {
+        /* cursor: none !important; */
+    }
+}
+
+/* �����Բ�� */
+.c-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background-color: #8a1f24;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+/* �����Χ����Ȧ */
+.c-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(138, 31, 36, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out, width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ����������ڿɵ��Ԫ����ʱ���ı仯״̬ */
+.c-cursor-dot.is-hovering {
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+}
+
+.c-cursor-ring.is-hovering {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(138, 31, 36, 0.1);
+    border-color: rgba(138, 31, 36, 0.8);
+    backdrop-filter: blur(2px);
+}
+
+/* 2. Lenis ƽ����������Ļ��� CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important; /* ����֮ǰ��ԭ��ƽ������������ JS ���� */
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Disable frosted-glass blur across the project for a cleaner paper-like UI. */
+*,
+*::before,
+*::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.c-site-topbar__inner,
+.c-site-header__inner,
+.c-editorial-panel,
+.c-shelf-panel,
+.c-ranking-panel,
+.c-feature-strip,
+.c-campaign-banner,
+.c-marquee-strip,
+.c-site-footer {
+    background-color: rgba(255, 251, 245, 0.96);
+}
+
+.c-book-card,
+.c-editorial-card,
+.c-ranking-card,
+.c-feature-strip__card,
+.c-story-card,
+.c-reader-fit-panel__item,
+.c-pill-card,
+.c-mini-card {
+    background-color: rgba(255, 252, 247, 0.94);
 }

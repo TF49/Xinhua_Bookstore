@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/react-bits.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon_logosc1/favicon-32x32.png">
 </head>
 
@@ -74,16 +75,16 @@
                         <article class="c-hero-banner__slide is-active" data-slide aria-hidden="false" style="--hero-image:url('../images/banner1.jpg');">
                             <div class="c-hero-banner__copy">
                                 <span class="c-overline">本周主策展</span>
-                                <h1>把城市的温度，翻成一页一页会发光的纸。</h1>
+                                <h1 data-rb-split>把城市的温度，翻成一页一页会发光的纸。</h1>
                                 <p>从量子科学到地方风物，从少儿启蒙到文学经典，新华书店把阅读做成一场可漫游的文化展览。</p>
                                 <div class="c-inline-actions">
-                                    <a href="./index2.html" class="c-button c-button--primary">阅读主推图书</a>
-                                    <a href="#shelf-section" class="c-button c-button--secondary">查看主题书架</a>
+                                    <a href="./index2.html" class="c-button c-button--primary rb-magnet">阅读主推图书</a>
+                                    <a href="#shelf-section" class="c-button c-button--secondary rb-magnet">查看主题书架</a>
                                 </div>
                             </div>
-                            <div class="c-hero-banner__aside">
+                            <div class="c-hero-banner__aside rb-star-border">
                                 <span>VOL. 05</span>
-                                <strong>星耀中国</strong>
+                                <strong class="rb-shiny-text">星耀中国</strong>
                                 <p>国之重器丛书特别展</p>
                             </div>
                         </article>
@@ -131,14 +132,14 @@
                 </div>
             </section>
 
-            <section class="c-shell c-marquee-strip" data-reveal>
+            <section class="c-shell c-marquee-strip rb-animated-list" data-reveal>
                 <div class="c-marquee-strip__item">
                     <span>世界读书日</span>
-                    <strong>40 场门店分享会</strong>
+                    <strong><span data-rb-count="40"></span> 场门店分享会</strong>
                 </div>
                 <div class="c-marquee-strip__item">
                     <span>新书速递</span>
-                    <strong>本周上新 128 册</strong>
+                    <strong>本周上新 <span data-rb-count="128"></span> 册</strong>
                 </div>
                 <div class="c-marquee-strip__item">
                     <span>专题推荐</span>
@@ -150,24 +151,24 @@
                 <div class="c-section-heading">
                     <div>
                         <span class="c-overline">Today&apos;s Editorial Picks</span>
-                        <h2>今日策展</h2>
+                        <h2><span class="rb-gradient-text">今日策展</span></h2>
                     </div>
                     <p>把电商首页做成书展导览页，让每个专区都有明确主题和视觉重心。</p>
                 </div>
 
                 <div class="c-editorial-panel__grid">
-                    <article class="c-editorial-card c-editorial-card--feature">
+                    <article class="c-editorial-card c-editorial-card--feature rb-spotlight-card rb-glare-hover">
                         <span class="c-editorial-card__tag">主编推荐</span>
                         <h3>把科学写得像诗，把工程写得像国家的脉搏。</h3>
                         <p>《星耀中国》作为主推图书，适合承担首页视觉锚点，也能连接详情页放大镜交互。</p>
                         <a href="./index2.html" class="c-text-link">查看主推详情</a>
                     </article>
-                    <article class="c-editorial-card">
+                    <article class="c-editorial-card rb-spotlight-card">
                         <span class="c-editorial-card__tag">新书预告</span>
                         <h3>风物与人文专题月</h3>
                         <p>以城市、地方、人物为线索，重做首页卡片区的内容层级，让静态作业更像真实专题页。</p>
                     </article>
-                    <article class="c-editorial-card">
+                    <article class="c-editorial-card rb-spotlight-card">
                         <span class="c-editorial-card__tag">主题书单</span>
                         <h3>适合假期带回家的六本书</h3>
                         <p>文学、儿童、历史、自然与科学混排展示，强化策展感而不是单纯堆商品。</p>
@@ -178,10 +179,10 @@
             <section class="c-shell c-shelf-panel" id="shelf-section" data-reveal>
                 <div class="c-section-heading">
                     <div>
-                        <span class="c-overline">Shelf Components</span>
+                        <span class="c-overline">精选书架</span>
                         <h2>主题书架</h2>
                     </div>
-                    <p>保持你原来的分类切换功能，但把内容卡片彻底重做成统一的书架组件。</p>
+                    <p>保持分类切换的清晰路径，让不同主题的书目像真实门店书架一样被慢慢发现。</p>
                 </div>
 
                 <div class="c-category-tabs" role="tablist" aria-label="图书分类">
@@ -193,7 +194,7 @@
 
                 <div class="c-shelf-panel__content">
                     <div class="c-book-grid is-active" data-tab-panel="science" role="tabpanel" aria-hidden="false">
-                        <article class="c-book-card c-book-card--wide" data-book-id="quantum-science-china" data-book-title="星耀中国（我们的量子科学）" data-book-category="科学纪实 · 人民邮电出版社" data-book-price="31.9" data-book-image="./images/kexue1.webp">
+                    <article class="c-book-card c-book-card--wide rb-tilted-card rb-glare-hover" data-book-id="quantum-science-china" data-book-title="星耀中国（我们的量子科学）" data-book-category="科学纪实 · 人民邮电出版社" data-book-price="31.9" data-book-image="./images/kexue1.webp">
                             <div class="c-book-card__media">
                                 <img src="./images/kexue1.webp" alt="星耀中国">
                                 <span class="c-book-card__badge">主推</span>
@@ -213,7 +214,7 @@
                             </div>
                         </article>
 
-                        <article class="c-book-card">
+                        <article class="c-book-card rb-spotlight-card">
                             <div class="c-book-card__media"><img src="./images/kexue2.JPG" alt="深部煤层群卸压开采"><span class="c-book-card__badge">工程</span></div>
                             <div class="c-book-card__body">
                                 <div class="c-book-card__meta">工程研究</div>
@@ -221,7 +222,7 @@
                                 <div class="c-price-row"><strong>￥42.80</strong><span>￥55.90</span></div>
                             </div>
                         </article>
-                        <article class="c-book-card">
+                        <article class="c-book-card rb-spotlight-card">
                             <div class="c-book-card__media"><img src="./images/kexue3.jpg" alt="未解之谜"><span class="c-book-card__badge">探索</span></div>
                             <div class="c-book-card__body">
                                 <div class="c-book-card__meta">科学趣读</div>
@@ -229,7 +230,7 @@
                                 <div class="c-price-row"><strong>￥28.90</strong><span>￥38.99</span></div>
                             </div>
                         </article>
-                        <article class="c-book-card">
+                        <article class="c-book-card rb-spotlight-card">
                             <div class="c-book-card__media"><img src="./images/kexue4.JPG" alt="移动应用开发"><span class="c-book-card__badge">实践</span></div>
                             <div class="c-book-card__body">
                                 <div class="c-book-card__meta">技术与设计</div>
@@ -237,7 +238,7 @@
                                 <div class="c-price-row"><strong>￥36.99</strong><span>￥49.99</span></div>
                             </div>
                         </article>
-                        <article class="c-book-card">
+                        <article class="c-book-card rb-spotlight-card">
                             <div class="c-book-card__media"><img src="./images/kexue5.webp" alt="化工热力学"><span class="c-book-card__badge">教材</span></div>
                             <div class="c-book-card__body">
                                 <div class="c-book-card__meta">大学教材</div>
@@ -310,16 +311,17 @@
             </section>
 
             <section class="c-shell c-ranking-panel" id="ranking-panel" data-reveal>
+                <div class="rb-dot-grid" aria-hidden="true"></div>
                 <div class="c-section-heading">
                     <div>
                         <span class="c-overline">Reading Signals</span>
                         <h2>本周榜单</h2>
                     </div>
-                    <p>用三列榜单增加门户感，也让首页有更多“像组件系统”的信息块。</p>
+                    <p>用三列榜单呈现读者正在关注的书，让首页更像一张会更新的门店推荐牌。</p>
                 </div>
 
                 <div class="c-ranking-panel__grid">
-                    <article class="c-ranking-card">
+                    <article class="c-ranking-card rb-spotlight-card">
                         <h3>畅销榜</h3>
                         <ol>
                             <li><span>01</span><strong>星耀中国（我们的量子科学）</strong></li>
@@ -328,7 +330,7 @@
                             <li><span>04</span><strong>化工热力学</strong></li>
                         </ol>
                     </article>
-                    <article class="c-ranking-card">
+                    <article class="c-ranking-card rb-spotlight-card">
                         <h3>豆瓣热议</h3>
                         <ol>
                             <li><span>01</span><strong>北流</strong></li>
@@ -337,7 +339,7 @@
                             <li><span>04</span><strong>一日的春光</strong></li>
                         </ol>
                     </article>
-                    <article class="c-ranking-card">
+                    <article class="c-ranking-card rb-spotlight-card">
                         <h3>少儿精选</h3>
                         <ol>
                             <li><span>01</span><strong>给孩子的思维导图</strong></li>
@@ -350,22 +352,90 @@
             </section>
 
             <section class="c-shell c-feature-strip" id="service-panel" data-reveal>
-                <article class="c-feature-strip__card">
+                <article class="c-feature-strip__card rb-spotlight-card">
                     <span>正版保障</span>
                     <h3>所有推荐书目均以纸质阅读体验为核心挑选。</h3>
                 </article>
-                <article class="c-feature-strip__card">
+                <article class="c-feature-strip__card rb-spotlight-card">
                     <span>门店自提</span>
                     <h3>支持线上选书、到店翻阅、线下提货的作业模拟路径。</h3>
                 </article>
-                <article class="c-feature-strip__card">
+                <article class="c-feature-strip__card rb-spotlight-card">
                     <span>会员权益</span>
                     <h3>把电子商务感和文化活动感放在同一张页面里共存。</h3>
                 </article>
-                <article class="c-feature-strip__card">
+                <article class="c-feature-strip__card rb-spotlight-card">
                     <span>阅读活动</span>
                     <h3>世界读书日、城市书展、亲子共读会都可继续扩展为独立专题页。</h3>
                 </article>
+            </section>
+
+            <section class="rb-velocity-strip" aria-label="新华书店阅读主题跑马灯">
+                <div class="rb-velocity-strip__track">
+                    <div class="rb-velocity-strip__line">
+                        <span>新书上架</span><span>城市书展</span><span>亲子共读</span><span>文学经典</span><span>科学纪实</span><span>门店自提</span><span>会员书单</span><span>阅读分享会</span><span>正版好书</span><span>主题策展</span>
+                    </div>
+                    <div class="rb-velocity-strip__line" aria-hidden="true">
+                        <span>新书上架</span><span>城市书展</span><span>亲子共读</span><span>文学经典</span><span>科学纪实</span><span>门店自提</span><span>会员书单</span><span>阅读分享会</span><span>正版好书</span><span>主题策展</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="c-shell rb-bits-lab rb-star-border" id="react-bits-lab" data-reveal>
+                <div class="c-section-heading">
+                    <div>
+                        <span class="c-overline">Store Reading Season</span>
+                        <h2>城市阅读季专题</h2>
+                    </div>
+                    <p>围绕新书、活动、服务和读者反馈，呈现更有门店氛围的新华书店阅读专题。</p>
+                </div>
+
+                <div class="rb-bits-lab__grid">
+                    <article class="rb-bits-lab__hero rb-glare-hover">
+                        <span class="c-overline rb-shiny-text">Reading Highlights</span>
+                        <h3>今天的书店是 <span data-rb-rotate="新书满架的|活动不断的|适合慢逛的"></span> 阅读橱窗。</h3>
+                        <p>从主推图书到门店活动，从亲子共读到城市书展，每一次停留都可能遇见下一本想带回家的书。</p>
+                        <div class="rb-bits-lab__metrics">
+                            <div class="rb-bits-lab__metric">
+                                <strong><span data-rb-count="14"></span>+</strong>
+                                <span>专题推荐</span>
+                            </div>
+                            <div class="rb-bits-lab__metric">
+                                <strong><span data-rb-count="4"></span></strong>
+                                <span>主题专区</span>
+                            </div>
+                            <div class="rb-bits-lab__metric">
+                                <strong><span data-rb-count="110"></span>+</strong>
+                                <span>本周新书</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <div class="rb-bits-lab__stack rb-animated-list">
+                        <article class="rb-bits-lab__panel rb-spotlight-card">
+                            <h3>今日阅读线索</h3>
+                            <ul class="rb-bits-list">
+                                <li><strong>主推新书</strong><span>科学纪实专题上新</span></li>
+                                <li><strong>城市活动</strong><span>周末阅读分享会</span></li>
+                                <li><strong>亲子共读</strong><span>少儿阅读护照开启</span></li>
+                                <li><strong>经典重读</strong><span>文学名著精选陈列</span></li>
+                            </ul>
+                        </article>
+                        <article class="rb-bits-lab__panel rb-spotlight-card">
+                            <h3>门店服务</h3>
+                            <div class="rb-bits-tag-cloud">
+                                <span>正版保障</span>
+                                <span>门店自提</span>
+                                <span>会员积分</span>
+                                <span>企业采购</span>
+                                <span>活动预约</span>
+                                <span>主题书单</span>
+                                <span>新书预订</span>
+                                <span>阅读咨询</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             <section class="c-shell c-campaign-banner" data-reveal>
@@ -430,6 +500,7 @@
     <script type="module" src="./js/search.js"></script>
     <script type="module" src="./js/cart.js"></script>
     <script type="module" src="./js/home.js"></script>
+    <script type="module" src="./js/react-bits.js"></script>
 </body>
 
 </html>

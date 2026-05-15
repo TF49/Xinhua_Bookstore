@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/index2.css">
+    <link rel="stylesheet" href="./styles/react-bits.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon_logosc1/favicon-32x32.png">
 </head>
 
@@ -62,7 +63,7 @@
         </header>
 
         <main id="main-content">
-            <section class="c-shell c-detail-hero" data-reveal>
+            <section class="c-shell c-detail-hero rb-spotlight-card rb-star-border" data-reveal>
                 <div class="c-detail-hero__gallery">
                     <div class="c-zoom-gallery">
                         <div class="c-zoom-gallery__media">
@@ -80,7 +81,7 @@
 
                 <div class="c-detail-purchase-panel" data-book-id="quantum-science-china" data-book-title="星耀中国（我们的量子科学）" data-book-category="科学普及 / 国之重器丛书" data-book-price="31.9" data-book-image="./images/kexue1.webp">
                     <span class="c-overline">Featured Science Narrative</span>
-                    <h1>星耀中国（我们的量子科学） / 国之重器丛书</h1>
+                    <h1 data-rb-split>星耀中国（我们的量子科学） / 国之重器丛书</h1>
                     <p class="c-detail-purchase-panel__subtitle">人民邮电出版社编 · 印娟 / 董雪 / 曹原 / 张亮 / 朱振才等著</p>
 
                     <div class="c-tag-row">
@@ -115,8 +116,8 @@
                     </div>
 
                     <div class="c-inline-actions c-inline-actions--stacked">
-                        <button type="button" class="c-button c-button--primary" data-cart-action>加入购物车</button>
-                        <button type="button" class="c-button c-button--secondary" data-buy-action>立即购买</button>
+                        <button type="button" class="c-button c-button--primary rb-magnet" data-cart-action>加入购物车</button>
+                        <button type="button" class="c-button c-button--secondary rb-magnet" data-buy-action>立即购买</button>
                         <button type="button" class="c-chip-button" data-save-book>收藏图书</button>
                     </div>
                 </div>
@@ -165,13 +166,13 @@
                 </article>
             </section>
 
-            <section class="c-shell c-recommend-panel" data-reveal>
+            <section class="c-shell c-recommend-panel rb-spotlight-card" data-reveal>
                 <div class="c-section-heading">
                     <div>
                         <span class="c-overline">Related Picks</span>
                         <h2>相关推荐</h2>
                     </div>
-                    <p>详情页推荐区沿用首页的书卡组件，让整个项目保持统一的组件语言。</p>
+                    <p>详情页推荐区沿用首页的书卡样式，让整站保持统一的书店陈列气质。</p>
                 </div>
 
                 <div class="c-recommend-grid">
@@ -214,6 +215,7 @@
     <script type="module" src="./js/search.js"></script>
     <script type="module" src="./js/cart.js"></script>
     <script type="module" src="./js/detail.js"></script>
+    <script type="module" src="./js/react-bits.js"></script>
 </body>
 
 </html>
